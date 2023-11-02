@@ -8,6 +8,14 @@
   text-align: center;
 }
 
+.links {
+  padding: 0.5rem;
+}
+
+.links a {
+  color: #fff;
+}
+
 .social-icons span {
   font-size: 1.5rem;
   margin-right: 0.75rem;

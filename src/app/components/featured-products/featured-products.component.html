@@ -1,0 +1,13 @@
+<div class="featured-products">
+  <div class="section-heading">
+    <h2>Featured Deals</h2>
+    <a href="#" class="view-all-link">View All</a>
+  </div>
+  <div class="carousel">
+    <nz-carousel nzAutoPlay>
+      <div nz-carousel-content *ngFor="let index of array">
+        <h3>{{ index }}</h3>
+      </div>
+    </nz-carousel>
+  </div>
+</div>
