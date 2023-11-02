@@ -1,0 +1,41 @@
+.ant-header {
+  border-bottom: 1px solid #ccc;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.2);
+  position: sticky;
+}
+
+.web-icon {
+  margin-right: 1rem;
+  padding: 0.5rem;
+}
+
+.ant-row {
+  align-items: center;
+}
+
+.logo-title {
+  font-family: Arial, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  padding: 2rem;
+  text-align: center;
+  background-color: #fff;
+  margin-left: 1rem;
+}
+
+.user-container {
+  margin-left: auto;
+}
+
+.user {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  border: 1px solid black;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
