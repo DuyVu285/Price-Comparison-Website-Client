@@ -1,0 +1,60 @@
+<div class="product-detail">
+  <div nz-row>
+    <div nz-col nzSpan="6" class="product-image">
+      <img
+        src="../../../assets/images/laptop.png"
+        alt="Product Image"
+        width="300"
+        height="300"
+      />
+    </div>
+
+    <div nz-col nzSpan="18" class="product-links">
+      <div nz-row [nzGutter]="16">
+        <div nz-col><app-product-card></app-product-card></div>
+        <div nz-col><app-product-card></app-product-card></div>
+        <div nz-col><app-product-card></app-product-card></div>
+        <div nz-col><app-product-card></app-product-card></div>
+        <div nz-col><app-product-card></app-product-card></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-set">
+    <nz-tabset>
+      <nz-tab
+        nzTitle="Price Comparison"
+        (nzClick)="ScrollIntoView('price-comparison')"
+      >
+      </nz-tab>
+      <nz-tab
+        nzTitle="Product Description"
+        (nzClick)="ScrollIntoView('product-description')"
+      >
+      </nz-tab>
+    </nz-tabset>
+  </div>
+
+  <div id="price-comparison">
+    <h3 [ngStyle]="{ 'margin-bottom.px': 16 }">Price Comparison</h3>
+    <nz-list nzBordered nzHeader="Header" nzFooter="Footer">
+      <nz-list-item *ngFor="let item of data">
+        <span nz-typography><mark>[ITEM]</mark></span>
+        {{ item }}
+      </nz-list-item>
+      <nz-list-item *ngFor="let item of data">
+        <span nz-typography><mark>[ITEM]</mark></span>
+        {{ item }}
+      </nz-list-item>
+    </nz-list>
+  </div>
+  <div id="product-description">
+    <nz-descriptions nzTitle="Product Description" nzBordered>
+      <ng-container *ngFor="let item of description.split(', '); let i = index">
+        <nz-descriptions-item [nzTitle]="labels[i]">{{
+          item
+        }}</nz-descriptions-item>
+      </ng-container>
+    </nz-descriptions>
+  </div>
+</div>

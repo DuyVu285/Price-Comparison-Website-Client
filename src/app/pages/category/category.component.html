@@ -1,0 +1,22 @@
+<div class="category-container">
+  <div class="breadcrumb-container">
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <a [routerLink]="['../home']">Home</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>Category Name</nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </div>
+  <div class="title-container">
+    <nz-page-header
+      class="site-page-header"
+      (nzBack)="onBack()"
+      nzBackIcon
+      nzTitle="Category Name"
+      nzSubtitle="This is a category of product name"
+    ></nz-page-header>
+  </div>
+  <div class="products-listing-container">
+    <app-products-listing></app-products-listing>
+  </div>
+</div>

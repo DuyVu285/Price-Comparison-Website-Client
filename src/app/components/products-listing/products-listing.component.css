@@ -1,0 +1,36 @@
+.products-listing {
+  margin: 1rem;
+  background-color: #ffffff;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.products-content {
+  height: 29rem;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.view-all-link {
+  color: #3498db;
+}
+
+.innerbox {
+  margin: 0.5rem;
+}
+
+.pagination {
+  margin: 1rem;
+  background-color: #ffffff;
+  text-align: right;
+}

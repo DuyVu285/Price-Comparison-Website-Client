@@ -1,18 +1,29 @@
 <div class="home-container">
-  <div class="content">
-    <div class="banner-container">
-      <app-banner></app-banner>
+  <div class="banner-container">
+    <app-banner></app-banner>
+  </div>
+
+  <div nz-row class="featured-deals-container">
+    <div nz-col nzSpan="8">
+      <app-featured-deals></app-featured-deals>
     </div>
-    <div class="featured-products-container">
-      <app-featured-products></app-featured-products>
+    <div nz-col nzSpan="8">
+      <app-featured-deals></app-featured-deals>
     </div>
-    <nz-layout class="products-section">
-      <nz-sider nzTheme="light" class="side-menu">
-        <app-side-menu></app-side-menu>
-      </nz-sider>
-      <nz-content class="content">
-        <app-products-listing></app-products-listing>
-      </nz-content>
-    </nz-layout>
+    <div nz-col nzSpan="8">
+      <app-featured-deals></app-featured-deals>
+    </div>
+  </div>
+
+  <div class="featured-products-container">
+    <app-featured-products></app-featured-products>
+  </div>
+
+  <div class="products-listing-container">
+    <app-products-listing></app-products-listing>
+    <app-products-listing></app-products-listing>
+    <app-products-listing></app-products-listing>
+    <app-products-listing></app-products-listing>
+    <app-products-listing></app-products-listing>
   </div>
 </div>

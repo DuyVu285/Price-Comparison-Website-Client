@@ -6,5 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./category.component.css']
 })
 export class CategoryComponent {
-
+  onBack(): void {
+    console.log('onBack');
+  }
 }

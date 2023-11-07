@@ -1,0 +1,18 @@
+<div class="search-container">
+  <div class="breadcrumb-container">
+    <nz-breadcrumb>
+      <nz-breadcrumb-item>
+        <a [routerLink]="['../home']">Home</a>
+      </nz-breadcrumb-item>
+      <nz-breadcrumb-item>Item Name</nz-breadcrumb-item>
+    </nz-breadcrumb>
+  </div>
+  <div nz-row>
+    <div nz-col nzSpan="4" class="side-menu-container">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div nz-col nzSpan="20" class="products-listing-container">
+      <app-products-listing></app-products-listing>
+    </div>
+  </div>
+</div>

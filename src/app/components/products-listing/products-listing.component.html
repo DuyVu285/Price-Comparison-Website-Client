@@ -1,1 +1,22 @@
-<p>products-listing works!</p>
+<div class="products-listing">
+  <div class="section-heading">
+    <h2>Products From Web</h2>
+    <a href="#" class="view-all-link">View All</a>
+  </div>
+  <div class="products-content">
+    <div nz-row [nzGutter]="16">
+      <div nz-col *ngFor="let product of productsToDisplay" nzSpan="6">
+        <div class="innerbox">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pagination">
+    <nz-pagination
+      [nzPageIndex]="currentPage"
+      [nzTotal]="totalIndex"
+      (nzPageIndexChange)="onPageChange($event)"
+    ></nz-pagination>
+  </div>
+</div>

@@ -19,16 +19,31 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzCarouselModule } from 'ng-zorro-antd/carousel';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzSwitchModule } from 'ng-zorro-antd/switch';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzPaginationModule } from 'ng-zorro-antd/pagination';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzBackTopModule } from 'ng-zorro-antd/back-top';
+import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
+import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
+import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
+import { NzTabsModule } from 'ng-zorro-antd/tabs';
+import { NzListModule } from 'ng-zorro-antd/list';
 
 import { FooterComponent } from './components/footer/footer.component';
-import { SearchComponent } from './components/search/search.component';
-import { CategoryComponent } from './components/category/category.component';
+import { SearchBoxComponent } from './components/search-box/search-box.component';
+import { CategoryMenuComponent } from './components/category-menu/category-menu.component';
 import { BannerComponent } from './components/banner/banner.component';
 import { HomeComponent } from './pages/home/home.component';
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
 import { ProductsListingComponent } from './components/products-listing/products-listing.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { SideMenuComponent } from './components/side-menu/side-menu.component';
+import { FeaturedDealsComponent } from './components/featured-deals/featured-deals.component';
+import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
+import { SearchComponent } from './pages/search/search.component';
+import { CategoryComponent } from './pages/category/category.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductComponent } from './pages/product/product.component';
 
 registerLocaleData(en);
 
@@ -38,13 +53,19 @@ registerLocaleData(en);
     HeaderComponent,
     FooterComponent,
     SearchComponent,
-    CategoryComponent,
+    CategoryMenuComponent,
     BannerComponent,
     HomeComponent,
     FeaturedProductsComponent,
     ProductsListingComponent,
     ProductCardComponent,
-    SideMenuComponent
+    SideMenuComponent,
+    FeaturedDealsComponent,
+    ScrollTopComponent,
+    SearchBoxComponent,
+    CategoryComponent,
+    ProductDetailComponent,
+    ProductComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +79,16 @@ registerLocaleData(en);
     NzButtonModule,
     NzCarouselModule,
     NzLayoutModule,
-    NzSwitchModule
+    NzSwitchModule,
+    NzGridModule,
+    NzPaginationModule,
+    NzCardModule,
+    NzBackTopModule,
+    NzBreadCrumbModule,
+    NzPageHeaderModule,
+    NzDescriptionsModule,
+    NzTabsModule,
+    NzListModule
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US }

@@ -1,0 +1,19 @@
+.featured-deals {
+  margin: 1rem 0;
+  padding: 0.25rem;
+}
+
+[nz-carousel-content] {
+  text-align: center;
+  height: 100x;
+  line-height: 160px;
+  background: #0e2653;
+  color: #fff;
+  overflow: hidden;
+}
+
+h3 {
+  color: #fff;
+  margin-bottom: 0;
+  user-select: none;
+}
