@@ -19,11 +19,7 @@
     <app-featured-products></app-featured-products>
   </div>
 
-  <div class="products-listing-container">
-    <app-products-listing></app-products-listing>
-    <app-products-listing></app-products-listing>
-    <app-products-listing></app-products-listing>
-    <app-products-listing></app-products-listing>
-    <app-products-listing></app-products-listing>
+  <div *ngIf="!!products" class="products-listing-container">
+    <app-products-listing [products]="products"></app-products-listing>
   </div>
 </div>

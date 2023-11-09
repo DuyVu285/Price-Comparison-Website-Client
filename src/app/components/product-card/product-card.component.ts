@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./product-card.component.css']
 })
 export class ProductCardComponent {
-  @Input() product: string = '';
+  @Input() product: any;
 }

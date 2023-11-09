@@ -1,7 +1,7 @@
 <div class="product-card">
-  <nz-card nzTitle="{{ product }}">
-    <p>{{ product }}</p>
-    <p>Card content</p>
-    <p>Card content</p>
+  <nz-card>
+    <img src="{{ product.imageUrl }}" alt="image" />
+    <p>{{ product.name }}</p>
+    <p>{{ product.price }}</p>
   </nz-card>
 </div>
