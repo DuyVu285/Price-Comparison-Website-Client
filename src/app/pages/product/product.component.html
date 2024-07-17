@@ -5,10 +5,10 @@
         <a [routerLink]="['../home']">Home</a>
       </nz-breadcrumb-item>
       <nz-breadcrumb-item>Category Name</nz-breadcrumb-item>
-      <nz-breadcrumb-item>Product Name</nz-breadcrumb-item>
+      <nz-breadcrumb-item>{{ product?.productName }} </nz-breadcrumb-item>
     </nz-breadcrumb>
   </div>
   <div class="product-detail-container">
-    <app-product-detail></app-product-detail>
+    <app-product-detail [product]="product"></app-product-detail>
   </div>
 </div>

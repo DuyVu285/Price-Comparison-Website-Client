@@ -1,0 +1,49 @@
+<nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo"></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item (click)="selectSection('summary')">
+        <span nz-icon nzType="pie-chart"></span>
+        <span>Summary</span>
+      </li>
+      <li nz-menu-item (click)="selectSection('products')">
+        <span nz-icon nzType="form"></span>
+        <span>Products</span>
+      </li>
+      <li nz-menu-item (click)="selectSection('models')">
+        <span nz-icon nzType="file"></span>
+        <span>Models</span>
+      </li>
+      <li nz-menu-item (click)="selectSection('unfilteredproducts')">
+        <span nz-icon nzType="bug"></span>
+        <span>Unfiltered Products</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <span
+        class="trigger"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"
+      ></span>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <app-summary-dashboard
+          *ngIf="selectedSection === 'summary'"
+        ></app-summary-dashboard>
+        <app-products-dashboard
+          *ngIf="selectedSection === 'products'"
+        ></app-products-dashboard>
+        <app-models-dashboard
+          *ngIf="selectedSection === 'models'"
+        ></app-models-dashboard>
+        <app-unfilteredproducts-dashboard
+          *ngIf="selectedSection === 'unfilteredproducts'"
+        ></app-unfilteredproducts-dashboard>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

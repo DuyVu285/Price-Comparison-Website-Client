@@ -1,0 +1,118 @@
+<span class="title">Models List</span>
+<div class="add-model-button">
+<app-add-model></app-add-model>
+</div>
+<br />
+<br />
+<nz-table
+  #editRowTable
+  nzBordered
+  [nzData]="displayedModels"
+  [nzPageSize]="pageSize"
+  [nzShowPagination]="true"
+  [nzFrontPagination]="false"
+  [nzPageSizeOptions]="[10, 20, 30, 40]"
+  [nzTotal]="models.length"
+  (nzPageIndexChange)="onPageIndexChange($event)"
+>
+  <thead>
+    <tr>
+      <th nzWidth="2%"></th>
+      <th nzWidth="30%">
+        Model
+        <nz-filter-trigger
+          [(nzVisible)]="visible"
+          [nzActive]="searchValue.length > 0"
+          [nzDropdownMenu]="menu"
+        >
+          <span nz-icon nzType="search"></span>
+        </nz-filter-trigger>
+      </th>
+      <th nzWidth="15%">Brand</th>
+      <th nzWidth="15%">Series</th>
+      <th nzWidth="15%">Lines</th>
+      <th nzWidth="10%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-template ngFor let-model [ngForOf]="displayedModels">
+      <tr class="fixed-row-height editable-row">
+        <ng-container *ngIf="!editCache[model._id].edit; else editTemplate">
+          <td></td>
+          <td class="word-wrap">
+            {{ model.brand }} {{ model.series }} {{ model.line }}
+          </td>
+          <td class="word-wrap">{{ model.brand }}</td>
+          <td class="word-wrap">{{ model.series }}</td>
+          <td class="word-wrap">{{ model.line }}</td>
+          <td>
+            <a (click)="startEdit(model._id)">Edit</a>
+            <a
+              nz-popconfirm
+              nzPopconfirmTitle="Sure to delete?"
+              (nzOnConfirm)="deleteRow(model._id)"
+              >Delete</a
+            >
+          </td>
+        </ng-container>
+        <ng-template #editTemplate>
+          <td class="word-wrap">
+            {{ model.brand }} {{ model.series }} {{ model.line }}
+          </td>
+          <td>
+            <input
+              type="text"
+              nz-input
+              [(ngModel)]="editCache[model._id].data.brand"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              nz-input
+              [(ngModel)]="editCache[model._id].data.series"
+            />
+          </td>
+          <td>
+            <input
+              type="text"
+              nz-input
+              [(ngModel)]="editCache[model._id].data.line"
+            />
+          </td>
+          <td>
+            <a (click)="saveEdit(model._id)" class="save">Save</a>
+            <a
+              nz-popconfirm
+              nzPopconfirmTitle="Sure to cancel?"
+              (nzOnConfirm)="cancelEdit(model._id)"
+              >Cancel</a
+            >
+          </td>
+        </ng-template>
+      </tr>
+    </ng-template>
+  </tbody>
+</nz-table>
+<nz-dropdown-menu #menu="nzDropdownMenu">
+  <div class="ant-table-filter-dropdown">
+    <div class="search-box">
+      <input
+        type="text"
+        nz-input
+        placeholder="Search name"
+        [(ngModel)]="searchValue"
+      />
+      <button
+        nz-button
+        nzSize="small"
+        nzType="primary"
+        (click)="search()"
+        class="search-button"
+      >
+        Search
+      </button>
+      <button nz-button nzSize="small" (click)="reset()">Reset</button>
+    </div>
+  </div>
+</nz-dropdown-menu>

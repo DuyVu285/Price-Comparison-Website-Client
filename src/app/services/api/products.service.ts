@@ -1,15 +1,62 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient} from '@angular/common/http';
+import { Observable, catchError, of, switchMap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductsService {
+  private CrudUrl = 'http://localhost:3001';
+  private ScrapeUrl = 'http://localhost:3000';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<any> {
-    return this.http.get('http://localhost:3000/api/products');
+  getAllProducts(): Observable<any[]> {
+    return this.http.get<any[]>(this.CrudUrl + '/api/products');
+  }
+
+  getProductById(productId: string): Observable<any> {
+    return this.http.get<any>(`${this.CrudUrl + '/api/products'}/${productId}`);
+  }
+
+  updateProduct(productId: string, product: any): Observable<any> {
+    return this.http.patch<any>(
+      `${this.CrudUrl + '/api/products'}/${productId}`,
+      product
+    );
+  }
+
+  createProduct(product: any): Observable<any> {
+    return this.http.post<any>(
+      `${this.CrudUrl + '/api/products/create'}`,
+      product
+    );
+  }
+
+  deleteProduct(productId: string): Observable<any> {
+    return this.http.delete<any>(
+      `${this.CrudUrl + '/api/products'}/${productId}`
+    );
+  }
+
+  searchProducts(query: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.CrudUrl}/search/${query}`).pipe(
+      catchError((error) => {
+        console.error('Error in first search:', error);
+        return of([]);
+      }),
+      switchMap((resultFromFirstSearch) => {
+        if (resultFromFirstSearch.length > 0) {
+          return of(resultFromFirstSearch);
+        } else {
+          return this.http.get<any[]>(`${this.ScrapeUrl}/search/${query}`).pipe(
+            catchError((error) => {
+              console.error('Error in second search:', error);
+              return of([]);
+            })
+          );
+        }
+      })
+    );
   }
 }

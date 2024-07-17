@@ -1,0 +1,178 @@
+<button nz-button [nzType]="'primary'" (click)="showModal()">
+  <span>Add Product</span>
+</button>
+<nz-modal
+  nzWidth="80%"
+  [(nzVisible)]="isModalVisible"
+  nzTitle="Add Product"
+  (nzOnCancel)="handleModalCancel()"
+>
+  <ng-container *nzModalContent>
+    <div class="add-product-form">
+      <form nz-form [formGroup]="validateForm">
+        <nz-form-item class="form-item">
+          <nz-form-label class="form-label" [nzSpan]="4" nzFor="productName"
+            >Product Name</nz-form-label
+          >
+          <nz-form-control [nzSpan]="15">
+            <input
+              nz-input
+              placeholder="Product Name"
+              class="form-input"
+              formControlName="productName"
+              required
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <div formArrayName="description">
+          <ng-container
+            *ngFor="let desc of description.controls; let i = index"
+          >
+            <nz-form-item class="form-item">
+              <nz-form-label class="form-label" [nzSpan]="4"
+                >Description {{ i + 1 }}</nz-form-label
+              >
+              <nz-form-control [nzSpan]="20">
+                <input
+                  nz-input
+                  class="form-input"
+                  placeholder="Description"
+                  [formControlName]="i"
+                  required
+                />
+              </nz-form-control>
+              <nz-form-control [nzSpan]="4">
+                <span
+                  nz-icon
+                  nzType="minus-circle-o"
+                  class="dynamic-delete-button"
+                  (click)="removeDescription(i)"
+                ></span>
+              </nz-form-control>
+            </nz-form-item>
+          </ng-container>
+        </div>
+
+        <nz-form-item>
+          <nz-form-control [nzSpan]="24" [nzOffset]="4">
+            <button nz-button nzType="dashed" (click)="addDescription()">
+              Add Description
+            </button>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item class="form-item">
+          <nz-form-label class="form-label" [nzSpan]="4" nzFor="productCode"
+            >Product Code</nz-form-label
+          >
+          <nz-form-control [nzSpan]="10">
+            <input
+              nz-input
+              placeholder="Product Code"
+              class="form-input"
+              formControlName="productCode"
+              required
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <div formGroupName="modelType">
+          <nz-form-item class="form-item">
+            <nz-form-label class="form-label" [nzSpan]="4" nzFor="brand"
+              >Brand</nz-form-label
+            >
+            <nz-form-control [nzSpan]="5">
+              <input
+                nz-input
+                placeholder="Brand"
+                class="form-input"
+                formControlName="brand"
+                required
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item">
+            <nz-form-label class="form-label" [nzSpan]="4" nzFor="series"
+              >Series</nz-form-label
+            >
+            <nz-form-control [nzSpan]="5">
+              <input
+                nz-input
+                placeholder="modelType.series"
+                class="form-input"
+                formControlName="series"
+                required
+              />
+            </nz-form-control>
+          </nz-form-item>
+
+          <nz-form-item class="form-item">
+            <nz-form-label class="form-label" [nzSpan]="4" nzFor="line"
+              >Line</nz-form-label
+            >
+            <nz-form-control [nzSpan]="5">
+              <input
+                nz-input
+                placeholder="Line"
+                class="form-input"
+                formControlName="line"
+                required
+              />
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+
+        <div formArrayName="prices">
+          <ng-container
+            *ngFor="let price of prices.controls; let i = index"
+            [formGroupName]="i"
+          >
+            <nz-form-item class="form-item">
+              <nz-form-label class="form-label" [nzSpan]="4"
+                >Price {{ i + 1 }}</nz-form-label
+              >
+              <nz-form-control [nzSpan]="10">
+                <input
+                  nz-input
+                  class="form-input"
+                  placeholder="URL"
+                  formControlName="key"
+                  required
+                />
+              </nz-form-control>
+              <nz-form-control [nzSpan]="5">
+                <input
+                  nz-input
+                  class="form-input"
+                  placeholder="Price"
+                  formControlName="value"
+                  required
+                />
+              </nz-form-control>
+              <nz-form-control [nzSpan]="4">
+                <span
+                  nz-icon
+                  nzType="minus-circle-o"
+                  class="dynamic-delete-button"
+                  (click)="removePrice(i)"
+                ></span>
+              </nz-form-control>
+            </nz-form-item>
+          </ng-container>
+        </div>
+        <nz-form-item class="form-item">
+          <nz-form-control [nzSpan]="15" [nzOffset]="4">
+            <button nz-button nzType="dashed" (click)="addPrice()">
+              <i nz-icon nzType="plus"></i> Add Price
+            </button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </ng-container>
+  <div *nzModalFooter>
+    <button nz-button nzType="primary" type="submit" (click)="onSubmit()">Add</button>
+  </div>
+</nz-modal>

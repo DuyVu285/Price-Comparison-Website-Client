@@ -1,6 +1,7 @@
 <nz-input-group [nzPrefix]="prefixIconSearch" class="search-box">
-  <input type="text" nz-input placeholder="Search " />
+  <input type="text" nz-input [(ngModel)]="searchQuery" placeholder="Search " (keyup.enter)="onSearch()" />
 </nz-input-group>
+
 <ng-template #prefixIconSearch>
   <span nz-icon nzType="search"></span>
 </ng-template>

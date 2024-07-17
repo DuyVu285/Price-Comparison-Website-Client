@@ -4,10 +4,6 @@
   min-height: 100vh;
 }
 
-.header {
-  margin-bottom: 1rem;
-}
-
 .content {
   flex: 1 0 auto;
   margin-bottom: 1rem;

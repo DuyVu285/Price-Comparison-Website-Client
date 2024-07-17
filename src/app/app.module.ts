@@ -3,12 +3,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './components/header/header.component';
+import { HeaderComponent } from './components/page-components/header/header.component';
 import { NZ_I18N } from 'ng-zorro-antd/i18n';
 import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -28,23 +28,34 @@ import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
 import { NzDescriptionsModule } from 'ng-zorro-antd/descriptions';
 import { NzTabsModule } from 'ng-zorro-antd/tabs';
 import { NzListModule } from 'ng-zorro-antd/list';
+import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzModalModule } from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
 
-import { FooterComponent } from './components/footer/footer.component';
-import { SearchBoxComponent } from './components/search-box/search-box.component';
-import { CategoryMenuComponent } from './components/category-menu/category-menu.component';
-import { BannerComponent } from './components/banner/banner.component';
+import { FooterComponent } from './components/page-components/footer/footer.component';
+import { SearchBoxComponent } from './components/page-components/search-box/search-box.component';
+import { CategoryMenuComponent } from './components/page-components/category-menu/category-menu.component';
+import { BannerComponent } from './components/home-components/banner/banner.component';
 import { HomeComponent } from './pages/home/home.component';
-import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
-import { ProductsListingComponent } from './components/products-listing/products-listing.component';
-import { ProductCardComponent } from './components/product-card/product-card.component';
-import { SideMenuComponent } from './components/side-menu/side-menu.component';
-import { FeaturedDealsComponent } from './components/featured-deals/featured-deals.component';
-import { ScrollTopComponent } from './components/scroll-top/scroll-top.component';
+import { FeaturedProductsComponent } from './components/home-components/featured-products/featured-products.component';
+import { ProductsListingComponent } from './components/product-components/products-listing/products-listing.component';
+import { ProductCardComponent } from './components/product-components/product-card/product-card.component';
+import { SideMenuComponent } from './components/page-components/side-menu/side-menu.component';
+import { FeaturedDealsComponent } from './components/home-components/featured-deals/featured-deals.component';
+import { ScrollTopComponent } from './components/page-components/scroll-top/scroll-top.component';
 import { SearchComponent } from './pages/search/search.component';
 import { CategoryComponent } from './pages/category/category.component';
-import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductDetailComponent } from './components/product-components/product-detail/product-detail.component';
 import { ProductComponent } from './pages/product/product.component';
-
+import { AdminComponent } from './pages/admin/admin.component';
+import { ProductsDashboardComponent } from './components/admin-components/products-dashboard/products-dashboard.component';
+import { ModelsDashboardComponent } from './components/admin-components/models-dashboard/models-dashboard.component';
+import { SummaryDashboardComponent } from './components/admin-components/summary-dashboard/summary-dashboard.component';
+import { AddProductComponent } from './components/admin-components/add-product/add-product.component';
+import { AddModelComponent } from './components/admin-components/add-model/add-model.component';
+import { UnfilteredproductsDashboardComponent } from './components/admin-components/unfilteredproducts-dashboard/unfilteredproducts-dashboard.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -65,12 +76,20 @@ registerLocaleData(en);
     SearchBoxComponent,
     CategoryComponent,
     ProductDetailComponent,
-    ProductComponent
+    ProductComponent,
+    AdminComponent,
+    ProductsDashboardComponent,
+    ModelsDashboardComponent,
+    SummaryDashboardComponent,
+    AddProductComponent,
+    AddModelComponent,
+    UnfilteredproductsDashboardComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
     NzInputModule,
@@ -88,11 +107,14 @@ registerLocaleData(en);
     NzPageHeaderModule,
     NzDescriptionsModule,
     NzTabsModule,
-    NzListModule
+    NzListModule,
+    NzTableModule,
+    NzPopconfirmModule,
+    NzDropDownModule,
+    NzModalModule,
+    NzFormModule,
   ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,64 @@
+<button nz-button [nzType]="'primary'" (click)="showModal()">
+  <span>Add Model</span>
+</button>
+<nz-modal
+  nzWidth="80%"
+  [(nzVisible)]="isModalVisible"
+  nzTitle="Add Model"
+  (nzOnCancel)="handleModalCancel()"
+>
+  <ng-container *nzModalContent>
+    <div class="add-model-form">
+      <form nz-form [formGroup]="validateForm">
+        <nz-form-item class="form-item">
+          <nz-form-label class="form-label" [nzSpan]="4" nzFor="brand"
+            >Brand</nz-form-label
+          >
+          <nz-form-control [nzSpan]="10">
+            <input
+              nz-input
+              placeholder="Brand"
+              class="form-input"
+              formControlName="brand"
+              required
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item class="form-item">
+          <nz-form-label class="form-label" [nzSpan]="4" nzFor="series"
+            >Series</nz-form-label
+          >
+          <nz-form-control [nzSpan]="10">
+            <input
+              nz-input
+              class="form-input"
+              placeholder="Series"
+              formControlName="series"
+              required
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item class="form-item">
+          <nz-form-label class="form-label" [nzSpan]="4" nzFor="line"
+            >Line</nz-form-label
+          >
+          <nz-form-control [nzSpan]="10">
+            <input
+              nz-input
+              class="form-input"
+              placeholder="Line"
+              formControlName="line"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </ng-container>
+  <div *nzModalFooter>
+    <button nz-button nzType="primary" type="submit" (click)="onSubmit()">
+      Add
+    </button>
+  </div>
+</nz-modal>

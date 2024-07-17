@@ -12,7 +12,14 @@
       <app-side-menu></app-side-menu>
     </div>
     <div nz-col nzSpan="20" class="products-listing-container">
-      <app-products-listing></app-products-listing>
+      <nz-card *ngFor="let product of searchResults">
+        <p>{{ product.productName }}</p>
+        <p>{{ product.description }}</p>
+        <nz-card *ngFor="let price of product.prices">
+          <p>{{ price.value }}</p>
+          <a href="{{ price.key }}">{{ price.key }}</a>
+        </nz-card>
+      </nz-card>
     </div>
   </div>
 </div>
