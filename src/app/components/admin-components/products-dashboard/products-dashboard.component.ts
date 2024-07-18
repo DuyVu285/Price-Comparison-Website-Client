@@ -29,6 +29,10 @@ export class ProductsDashboardComponent {
     this.getProducts();
   }
 
+  onProductAdded() {
+    this.getProducts();
+  }
+
   getProducts() {
     this.productsService.getAllProducts().subscribe({
       next: (data: any) => {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, catchError, of, switchMap } from 'rxjs';
 
 @Injectable({
@@ -28,7 +28,7 @@ export class ProductsService {
 
   createProduct(product: any): Observable<any> {
     return this.http.post<any>(
-      `${this.CrudUrl + '/api/products/create'}`,
+      `${this.CrudUrl + '/api/products'}`,
       product
     );
   }
@@ -59,4 +59,22 @@ export class ProductsService {
       })
     );
   }
-}
+
+  filterAndStoreProduct(data: any): Observable<any> {
+    return this.http.post<any>(
+      this.ScrapeUrl + '/api/products/filterAndStoreProduct',
+      data
+    );
+  }
+
+  filterAndStoreMultipleProducts(dataArray: any[]): Observable<any> {
+    return this.http.post<any>(
+      this.ScrapeUrl + '/api/products/filterAndStoreMultipleProducts',
+      dataArray
+    );
+  }
+
+  getSummary(): Observable<any> {
+    return this.http.get<any>(this.CrudUrl + '/api/products/summary');
+  }
+} 

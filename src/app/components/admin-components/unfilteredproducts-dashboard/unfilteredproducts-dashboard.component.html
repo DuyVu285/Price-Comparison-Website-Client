@@ -1,6 +1,14 @@
-<span class="title">Products List</span>
-<div class="add-product-button">
-<app-add-product></app-add-product>
+<span class="title">Unfiltered Products List</span>
+<div class="add-model-button">
+  <app-add-model (modelAdded)="onModelAdded()"></app-add-model>
+  <button
+    class="delete-button"
+    nz-button
+    nzType="primary"
+    (click)="deleteAll()"
+  >
+    Delete All
+  </button>
 </div>
 <br />
 <br />
@@ -12,7 +20,7 @@
   [nzShowPagination]="true"
   [nzFrontPagination]="false"
   [nzPageSizeOptions]="[10, 20, 30, 40]"
-  [nzTotal]="products.length"
+  [nzTotal]="unfilteredProducts.length"
   (nzPageIndexChange)="onPageIndexChange($event)"
 >
   <thead>
@@ -29,28 +37,46 @@
         </nz-filter-trigger>
       </th>
       <th nzWidth="30%">Description</th>
-      <th nzWidth="15%">Product Code</th>
-      <th nzWidth="15%">Model Type</th>
+      <th nzWidth="15%">Price</th>
+      <th nzWidth="15%">Url</th>
+      <th nzWidth="5%">Model</th>
       <th nzWidth="10%">Action</th>
     </tr>
   </thead>
   <tbody>
     <ng-template ngFor let-product [ngForOf]="displayedProducts">
       <tr class="fixed-row-height editable-row">
-        <ng-container *ngIf="!editCache[product._id].edit; else editTemplate">
-          <td
-            [nzExpand]="editCache[product._id].expand"
-            (click)="expandRow(product._id)"
-          ></td>
+        <ng-container *ngIf="!editCache[product._id].edit">
+          <td></td>
           <td class="word-wrap">{{ product.productName }}</td>
           <td class="word-wrap">{{ product.description }}</td>
-          <td class="word-wrap">{{ product.productCode }}</td>
+          <td class="word-wrap">{{ product.price }}</td>
           <td class="word-wrap">
-            {{ product.modelType.brand }} {{ product.modelType.series }}
-            {{ product.modelType.line }}
+            <a
+              href="{{ product.url }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{{ product.url }}</a
+            >
           </td>
           <td>
-            <a (click)="startEdit(product._id)">Edit</a>
+            <span
+              *ngIf="!editCache[product._id].modelExists; else checkIcon"
+              nz-icon
+              nzType="close"
+              nzTheme="outline"
+            ></span>
+            <ng-template #checkIcon>
+              <span nz-icon nzType="check" nzTheme="outline"></span>
+            </ng-template>
+          </td>
+          <td>
+            <a
+              nz-popconfirm
+              nzPopconfirmTitle="Sure to filter?"
+              (nzOnConfirm)="filterRow(product._id)"
+              >Filter</a
+            >
             <a
               nz-popconfirm
               nzPopconfirmTitle="Sure to delete?"
@@ -59,120 +85,6 @@
             >
           </td>
         </ng-container>
-        <ng-template #editTemplate>
-          <td
-            [nzExpand]="editCache[product._id].expand"
-            (click)="expandRow(product._id)"
-          ></td>
-          <td>
-            <input
-              type="text"
-              nz-input
-              [(ngModel)]="editCache[product._id].data.productName"
-            />
-          </td>
-          <td>
-            <input
-              type="text"
-              nz-input
-              [(ngModel)]="editCache[product._id].data.description"
-            />
-          </td>
-          <td>
-            <input
-              type="text"
-              nz-input
-              [(ngModel)]="editCache[product._id].data.productCode"
-            />
-          </td>
-          <td class="model-type-container">
-            <input
-              type="text"
-              nz-input
-              [(ngModel)]="editCache[product._id].data.modelType.brand"
-            />
-            <input
-              type="text"
-              nz-input
-              [(ngModel)]="editCache[product._id].data.modelType.series"
-            />
-            <input
-              type="text"
-              nz-input
-              [(ngModel)]="editCache[product._id].data.modelType.line"
-            />
-          </td>
-          <td>
-            <a (click)="saveEdit(product._id)" class="save">Save</a>
-            <a
-              nz-popconfirm
-              nzPopconfirmTitle="Sure to cancel?"
-              (nzOnConfirm)="cancelEdit(product._id)"
-              >Cancel</a
-            >
-          </td>
-        </ng-template>
-      </tr>
-      <tr [nzExpand]="editCache[product._id].expand">
-        <nz-table
-          #innerTable
-          [nzData]="product.prices"
-          nzSize="middle"
-          nzShowPagination="false"
-        >
-          <thead>
-            <tr>
-              <th nzWidth="60%">Url</th>
-              <th nzWidth="20%">Price</th>
-              <th nzWidth="20%">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let price of product.prices">
-              <ng-container
-                *ngIf="
-                  !editCache[product._id].editNested[price.key];
-                  else editTemplateNested
-                "
-              >
-                <td>
-                  <a>{{ price.key }}</a>
-                </td>
-                <td>{{ price.value }}</td>
-                <td>
-                  <a (click)="startEditNested(product._id, price.key)">Edit</a>
-                  <a
-                    nz-popconfirm
-                    nzPopconfirmTitle="Sure to delete?"
-                    (nzOnConfirm)="deleteNested(product._id, price.key)"
-                    >Delete</a
-                  >
-                </td>
-              </ng-container>
-              <ng-template #editTemplateNested>
-                <td>
-                  <input type="text" nz-input [(ngModel)]="price.key" />
-                </td>
-                <td>
-                  <input type="text" nz-input [(ngModel)]="price.value" />
-                </td>
-                <td>
-                  <a
-                    (click)="saveEditNested(product._id, price.key)"
-                    class="save"
-                    >Save</a
-                  >
-                  <a
-                    nz-popconfirm
-                    nzPopconfirmTitle="Sure to cancel?"
-                    (nzOnConfirm)="cancelEditNested(product._id, price.key)"
-                    >Cancel</a
-                  >
-                </td>
-              </ng-template>
-            </tr>
-          </tbody>
-        </nz-table>
       </tr>
     </ng-template>
   </tbody>

@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   FormControl,
   Validators,
-  FormArray,
 } from '@angular/forms';
 import { ModelsService } from 'src/app/services/api/models.service';
 
@@ -14,6 +13,8 @@ import { ModelsService } from 'src/app/services/api/models.service';
   styleUrls: ['./add-model.component.css'],
 })
 export class AddModelComponent {
+  @Output() modelAdded: EventEmitter<void> = new EventEmitter<void>();
+
   validateForm: FormGroup<{
     brand: FormControl<string | null>;
     series: FormControl<string | null>;
@@ -50,7 +51,12 @@ export class AddModelComponent {
   onSubmit(): void {
     if (this.validateForm.valid) {
       this.modelsService.createModel(this.validateForm.value).subscribe({
-        next: (response) => console.log('Model created:', response),
+        next: (response) => {
+          console.log('Model created:', response);
+          this.modelAdded.emit();
+          this.validateForm.reset();
+          this.isModalVisible = false;
+        },
         error: (err) => console.error('HTTP Error:', err),
       });
     } else {

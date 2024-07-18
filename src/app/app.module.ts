@@ -33,6 +33,7 @@ import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
 import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 
 import { FooterComponent } from './components/page-components/footer/footer.component';
 import { SearchBoxComponent } from './components/page-components/search-box/search-box.component';
@@ -113,6 +114,7 @@ registerLocaleData(en);
     NzDropDownModule,
     NzModalModule,
     NzFormModule,
+    NzStatisticModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

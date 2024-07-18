@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -14,6 +14,8 @@ import { ProductsService } from 'src/app/services/api/products.service';
   styleUrls: ['./add-product.component.css'],
 })
 export class AddProductComponent {
+  @Output() productAdded: EventEmitter<void> = new EventEmitter<void>();
+
   validateForm: FormGroup<{
     productName: FormControl<string | null>;
     description: FormArray<FormControl<string | null>>;
@@ -101,7 +103,12 @@ export class AddProductComponent {
   onSubmit(): void {
     if (this.validateForm.valid) {
       this.productsService.createProduct(this.validateForm.value).subscribe({
-        next: (response) => console.log('Product created:', response),
+        next: (response) => {
+          console.log('Product created:', response);
+          this.productAdded.emit();
+          this.validateForm.reset();
+          this.isModalVisible = false;
+        },
         error: (err) => console.error('HTTP Error:', err),
       });
     } else {
