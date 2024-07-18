@@ -1,5 +1,5 @@
 import { ModelsService } from 'src/app/services/api/models.service';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UnfiteredProductsService } from 'src/app/services/api/unfiltered-products.service';
 import { ProductsService } from 'src/app/services/api/products.service';
@@ -33,7 +33,7 @@ export class UnfilteredproductsDashboardComponent {
     this.getUnfilteredProducts();
   }
 
-  onModelAdded(){
+  onModelAdded() {
     this.getUnfilteredProducts();
   }
 
@@ -67,6 +67,14 @@ export class UnfilteredproductsDashboardComponent {
       (this.pageIndex - 1) * this.pageSize,
       this.pageIndex * this.pageSize
     );
+  }
+
+  filterAllChecked(): void {
+    this.unfilteredProducts.forEach((item) => {
+      if (this.editCache[item._id].modelExists) {
+        this.filterRow(item._id);
+      }
+    });
   }
 
   filterRow(id: string): void {

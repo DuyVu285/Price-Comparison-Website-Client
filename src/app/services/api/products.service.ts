@@ -27,10 +27,7 @@ export class ProductsService {
   }
 
   createProduct(product: any): Observable<any> {
-    return this.http.post<any>(
-      `${this.CrudUrl + '/api/products'}`,
-      product
-    );
+    return this.http.post<any>(`${this.CrudUrl + '/api/products'}`, product);
   }
 
   deleteProduct(productId: string): Observable<any> {
@@ -75,6 +72,6 @@ export class ProductsService {
   }
 
   getSummary(): Observable<any> {
-    return this.http.get<any>(this.CrudUrl + '/api/products/summary');
+    return this.http.get<any>(this.CrudUrl + '/api/summary/products');
   }
-} 
+}

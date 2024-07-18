@@ -1,0 +1,49 @@
+<span class="title">Summary</span>
+<div class="summary-dashboard" *ngIf="productsSummary">
+  <nz-card>
+    <div nz-row nzGutter="16">
+      <div nz-col nzSpan="8">
+        <nz-statistic
+          [nzValue]="productsSummary.totalItems"
+          [nzTitle]="'Total Products'"
+        ></nz-statistic>
+      </div>
+      <div nz-col nzSpan="8">
+        <nz-statistic
+          [nzValue]="productsSummary.itemsLast24Hours"
+          [nzTitle]="'Items Created Last 24 Hours'"
+        ></nz-statistic>
+      </div>
+    </div>
+  </nz-card>
+</div>
+<div class="summary-dashboard" *ngIf="unfilteredProductsSummary">
+  <nz-card>
+    <div nz-row nzGutter="16">
+      <div nz-col nzSpan="8">
+        <nz-statistic
+          [nzValue]="unfilteredProductsSummary.totalItems"
+          [nzTitle]="'Total Unfiltered Products'"
+        ></nz-statistic>
+      </div>
+      <div nz-col nzSpan="8">
+        <nz-statistic
+          [nzValue]="unfilteredProductsSummary.itemsLast24Hours"
+          [nzTitle]="'Items Created Last 24 Hours'"
+        ></nz-statistic>
+      </div>
+    </div>
+  </nz-card>
+</div>
+<div class="summary-dashboard" *ngIf="modelsSummary">
+  <nz-card>
+    <div nz-row nzGutter="16">
+      <div nz-col nzSpan="8">
+        <nz-statistic
+          [nzValue]="modelsSummary.totalItems"
+          [nzTitle]="'Total Models'"
+        ></nz-statistic>
+      </div>
+    </div>
+  </nz-card>
+</div>

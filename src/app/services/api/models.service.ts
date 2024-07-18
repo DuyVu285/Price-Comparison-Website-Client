@@ -38,6 +38,6 @@ export class ModelsService {
   }
 
   getSummary(): Observable<any> {
-    return this.http.get<any>(this.CrudUrl + '/api/models/summary');
+    return this.http.get<any>(this.CrudUrl + '/api/summary/models');
   }
 }

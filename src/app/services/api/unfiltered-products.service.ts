@@ -11,7 +11,9 @@ export class UnfiteredProductsService {
   constructor(private http: HttpClient) {}
 
   getAllUnfilteredProducts(): Observable<any[]> {
-    const data = this.http.get<any[]>(this.CrudUrl + '/api/unfiltered-products');
+    const data = this.http.get<any[]>(
+      this.CrudUrl + '/api/unfiltered-products'
+    );
     console.log('Received data', data);
     return this.http.get<any[]>(this.CrudUrl + '/api/unfiltered-products');
   }
@@ -33,6 +35,8 @@ export class UnfiteredProductsService {
   }
 
   getSummary(): Observable<any> {
-    return this.http.get<any>(this.CrudUrl + '/api/unfiltered-products/summary');
+    return this.http.get<any>(
+      this.CrudUrl + '/api/summary/unfiltered-products'
+    );
   }
 }
