@@ -1,17 +1,10 @@
 <div class="product-detail">
-  <div nz-row>
-    <div nz-col nzSpan="6" class="product-image">
-      <img src="" alt="Product Image" width="300" height="300" />
+  <div nz-row nzGutter="16">
+    <div nz-col nzSpan="10" class="product-image">
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Loaded Image" />
     </div>
-
-    <div nz-col nzSpan="18" class="product-links">
-      <div nz-row [nzGutter]="16">
-        <div nz-col><app-product-card></app-product-card></div>
-        <div nz-col><app-product-card></app-product-card></div>
-        <div nz-col><app-product-card></app-product-card></div>
-        <div nz-col><app-product-card></app-product-card></div>
-        <div nz-col><app-product-card></app-product-card></div>
-      </div>
+    <div nz-col nzSpan="6" class="product-links">
+      <span>{{ product.productName }}</span>
     </div>
   </div>
 
@@ -31,14 +24,14 @@
   </div>
 
   <div id="price-comparison">
-    <nz-descriptions nzTitle="Price Comparison" nzBordered>
+    <nz-descriptions nzTitle="Price Comparison">
       <nz-descriptions-item>
-        <nz-list nzBordered nzHeader="Header" nzFooter="Footer">
+        <nz-list nzBordered>
           <nz-list-item *ngFor="let price of product?.prices">
+            <a href="{{ price.key }}" target="_blank">
+              <mark>{{ price.key }}</mark>
+            </a>
             <span nz-typography>
-              <a href="{{ price.key }}" target="_blank">
-                <mark>{{ price.key }}</mark>
-              </a>
               {{ price.value }}
             </span>
           </nz-list-item>
@@ -49,7 +42,7 @@
 
   <div id="product-description">
     <nz-descriptions nzTitle="Product Description" nzBordered>
-      <ng-container *ngFor="let desc of product.description">
+      <ng-container *ngFor="let desc of product?.description">
         <nz-descriptions-item>
           {{ desc }}
         </nz-descriptions-item>

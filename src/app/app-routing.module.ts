@@ -5,16 +5,16 @@ import { SearchComponent } from './pages/search/search.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { ProductComponent } from './pages/product/product.component';
 import { AdminComponent } from './pages/admin/admin.component';
-
-import { ProductsDashboardComponent } from './components/admin-components/products-dashboard/products-dashboard.component';
+import { LoginComponent } from './pages/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'category', component: CategoryComponent },
+  { path: 'category/:name', component: CategoryComponent },
   { path: 'product/:id', component: ProductComponent },
   { path: 'admin', component: AdminComponent },
+  { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: '/home' },
 ];
 

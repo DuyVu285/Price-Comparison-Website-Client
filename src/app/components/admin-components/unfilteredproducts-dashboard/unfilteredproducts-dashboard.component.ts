@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UnfiteredProductsService } from 'src/app/services/api/unfiltered-products.service';
 import { ProductsService } from 'src/app/services/api/products.service';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 @Component({
   selector: 'app-unfilteredproducts-dashboard',
   templateUrl: './unfilteredproducts-dashboard.component.html',
@@ -26,7 +27,8 @@ export class UnfilteredproductsDashboardComponent {
   constructor(
     private readonly unfilteredProductsService: UnfiteredProductsService,
     private readonly productsService: ProductsService,
-    private readonly modelsService: ModelsService
+    private readonly modelsService: ModelsService,
+    private notification: NzNotificationService
   ) {}
 
   ngOnInit() {
@@ -91,6 +93,7 @@ export class UnfilteredproductsDashboardComponent {
               );
               delete this.editCache[id];
               this.updateDisplayedProducts();
+              this.showNotification('Success', 'Product filtered and stored');
             },
             error: (error: HttpErrorResponse) => {
               console.error('Delete failed', error);
@@ -108,12 +111,9 @@ export class UnfilteredproductsDashboardComponent {
       this.modelsService
         .checkModels(this.editCache[item._id].data.productName)
         .subscribe({
-          next: (data: boolean) => {
+          next: (data: any) => {
             console.log('Check model successfully', data);
             this.editCache[item._id].modelExists = data;
-          },
-          error: (error: HttpErrorResponse) => {
-            console.error('Check model failed', error);
           },
         });
     });
@@ -125,6 +125,7 @@ export class UnfilteredproductsDashboardComponent {
     );
     this.unfilteredProductsService.deleteUnfilteredProductById(id).subscribe({
       next: () => {
+        this.showNotification('Success', 'Product deleted');
         delete this.editCache[id];
         this.updateDisplayedProducts();
       },
@@ -136,6 +137,7 @@ export class UnfilteredproductsDashboardComponent {
       .deleteAllUnfilteredProducts()
       .subscribe(() => {
         this.unfilteredProducts = [];
+        this.showNotification('Success', 'All products deleted');
         this.updateEditCache();
         this.updateDisplayedProducts();
       });
@@ -168,5 +170,13 @@ export class UnfilteredproductsDashboardComponent {
     } else {
       this.updateDisplayedProducts();
     }
+  }
+
+  showNotification(title: string, content: string): void {
+    this.notification
+      .blank(title, content, { nzPlacement: 'bottom' })
+      .onClick.subscribe(() => {
+        console.log('notification clicked!');
+      });
   }
 }

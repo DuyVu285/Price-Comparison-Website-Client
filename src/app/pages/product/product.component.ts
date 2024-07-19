@@ -27,11 +27,11 @@ export class ProductComponent {
 
   getProductById(productId: string) {
     this.productsService.getProductById(productId).subscribe({
-      next: (data: any) => {
+      next: (data) => {
         console.log('Get successfully', data);
         this.product = data;
       },
-      error: (error: any) => {
+      error: (error) => {
         console.log('Get failed', error);
       },
     });

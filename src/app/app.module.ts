@@ -34,6 +34,7 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
+import { NzNotificationModule } from 'ng-zorro-antd/notification';
 
 import { FooterComponent } from './components/page-components/footer/footer.component';
 import { SearchBoxComponent } from './components/page-components/search-box/search-box.component';
@@ -57,6 +58,9 @@ import { SummaryDashboardComponent } from './components/admin-components/summary
 import { AddProductComponent } from './components/admin-components/add-product/add-product.component';
 import { AddModelComponent } from './components/admin-components/add-model/add-model.component';
 import { UnfilteredproductsDashboardComponent } from './components/admin-components/unfilteredproducts-dashboard/unfilteredproducts-dashboard.component';
+import { LoginComponent } from './pages/login/login.component';
+import { CategoryListingComponent } from './components/product-components/category-listing/category-listing.component';
+import { CustomCurrencyPipe } from './custom-currency.pipe';
 registerLocaleData(en);
 
 @NgModule({
@@ -85,6 +89,9 @@ registerLocaleData(en);
     AddProductComponent,
     AddModelComponent,
     UnfilteredproductsDashboardComponent,
+    LoginComponent,
+    CategoryListingComponent,
+    CustomCurrencyPipe,
   ],
   imports: [
     BrowserModule,
@@ -115,6 +122,8 @@ registerLocaleData(en);
     NzModalModule,
     NzFormModule,
     NzStatisticModule,
+    NzNotificationModule,
+    NzPageHeaderModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

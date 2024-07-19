@@ -1,5 +1,28 @@
 <div class="product-card" (click)="navigateToProduct(product._id)">
-  <nz-card>
-    <p>{{ product?.productName }}</p>
+  <nz-card [nzCover]="coverTemplate">
+    <nz-card-meta
+      [nzTitle]="titleTemplate"
+      [nzDescription]="descriptionTemplate"
+    ></nz-card-meta>
+    <div class="price" *ngIf="lowestPrice !== undefined">
+      {{ lowestPrice | customCurrency : "VND" : "vi-VN" }}
+    </div>
   </nz-card>
+  <ng-template #coverTemplate>
+    <img *ngIf="imageUrl" [src]="imageUrl" alt="Loaded Image" />
+  </ng-template>
+  <ng-template #titleTemplate>
+    <div class="nz-card-meta-title">
+      {{ product?.productName }}
+    </div>
+  </ng-template>
+  <ng-template #descriptionTemplate>
+    <div class="product-description">
+      <nz-row [nzGutter]="16">
+        <nz-col *ngFor="let desc of product?.description" [nzSpan]="12">
+          <div>{{ desc }}</div>
+        </nz-col>
+      </nz-row>
+    </div>
+  </ng-template>
 </div>

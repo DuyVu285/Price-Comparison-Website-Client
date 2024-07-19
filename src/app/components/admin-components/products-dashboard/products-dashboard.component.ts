@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ProductsService } from 'src/app/services/api/products.service';
 
 @Component({
@@ -23,7 +24,10 @@ export class ProductsDashboardComponent {
   searchValue = '';
   visible = false;
 
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(
+    private readonly productsService: ProductsService,
+    private notification: NzNotificationService
+  ) {}
 
   ngOnInit() {
     this.getProducts();
@@ -119,6 +123,7 @@ export class ProductsDashboardComponent {
         next: () => {
           this.editCache[id].edit = false;
           this.updateDisplayedProducts();
+          this.showNotification('Success', 'Product updated');
         },
       });
     } else {
@@ -147,6 +152,7 @@ export class ProductsDashboardComponent {
           next: () => {
             this.editCache[productId].editNested[priceKey] = false;
             this.updateDisplayedProducts();
+            this.showNotification('Success', 'Price updated');
           },
         });
     } else {
@@ -159,6 +165,7 @@ export class ProductsDashboardComponent {
       next: () => {
         delete this.editCache[id];
         this.updateDisplayedProducts();
+        this.showNotification('Success', 'Product deleted');
       },
     });
   }
@@ -175,6 +182,7 @@ export class ProductsDashboardComponent {
         next: () => {
           delete this.editCache[id].editNested[priceKey];
           this.updateDisplayedProducts();
+          this.showNotification('Success', 'Price deleted');
         },
       });
   }
@@ -206,5 +214,13 @@ export class ProductsDashboardComponent {
     } else {
       this.updateDisplayedProducts();
     }
+  }
+
+  showNotification(title: string, content: string): void {
+    this.notification
+      .blank(title, content, { nzPlacement: 'bottom' })
+      .onClick.subscribe(() => {
+        console.log('notification clicked!');
+      });
   }
 }

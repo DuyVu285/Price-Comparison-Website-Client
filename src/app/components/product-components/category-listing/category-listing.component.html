@@ -1,0 +1,14 @@
+<nz-list nzGrid>
+  <div nz-row [nzGutter]="16">
+    <div nz-col [nzSpan]="4" *ngFor="let product of displayedProducts">
+      <nz-list-item>
+        <app-product-card [product]="product"></app-product-card>
+      </nz-list-item>
+    </div>
+  </div>
+  <div nz-row *ngIf="hasMoreProducts" class="load-more-button">
+    <button nz-button nzType="default" (click)="loadMore()" nzSize="large">
+      Load More
+    </button>
+  </div>
+</nz-list>

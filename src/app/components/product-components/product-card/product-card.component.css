@@ -4,6 +4,31 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.nz-card-meta-title {
+  white-space: normal;
+  word-wrap: break-word;
+}
+
 .product-card img {
-  width: 20em;
+  width: 100%;
+  height: 75%;
+  object-fit: cover;
+  border-radius: 0.25rem;
+}
+
+.product-card .price {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-top: 10px;
+  text-align: right;
+  color: #ff4d4f;
+}
+
+.product-description {
+  background-color: #ececec; /* Light grey color */
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  font-weight: 300;
+  font-size: 0.9rem;
+  color: #747579;
 }

@@ -49,6 +49,7 @@ export class AddModelComponent {
   }
 
   onSubmit(): void {
+    console.log(this.validateForm.value);
     if (this.validateForm.valid) {
       this.modelsService.createModel(this.validateForm.value).subscribe({
         next: (response) => {

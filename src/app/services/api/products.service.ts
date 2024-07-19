@@ -19,6 +19,12 @@ export class ProductsService {
     return this.http.get<any>(`${this.CrudUrl + '/api/products'}/${productId}`);
   }
 
+  getProductsByCategory(category: string): Observable<any[]> {
+    return this.http.get<any[]>(
+      `${this.CrudUrl + '/api/category/'}${category}`
+    );
+  }
+
   updateProduct(productId: string, product: any): Observable<any> {
     return this.http.patch<any>(
       `${this.CrudUrl + '/api/products'}/${productId}`,

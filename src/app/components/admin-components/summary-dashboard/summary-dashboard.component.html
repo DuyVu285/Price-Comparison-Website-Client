@@ -1,4 +1,5 @@
 <span class="title">Summary</span>
+
 <div class="summary-dashboard" *ngIf="productsSummary">
   <nz-card>
     <div nz-row nzGutter="16">
@@ -43,6 +44,18 @@
           [nzValue]="modelsSummary.totalItems"
           [nzTitle]="'Total Models'"
         ></nz-statistic>
+      </div>
+      <div nz-col nzSpan="8">
+        <div class="buttons">
+          <button
+            nz-button
+            nzType="primary"
+            [nzLoading]="scrapingInProgress"
+            (click)="scrapeAll()"
+          >
+            Start Scraping
+          </button>
+        </div>
       </div>
     </div>
   </nz-card>

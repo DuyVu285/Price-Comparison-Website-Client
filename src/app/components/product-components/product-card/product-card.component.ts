@@ -1,5 +1,7 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { ImagesService } from 'src/app/services/api/images.service';
 
 @Component({
   selector: 'app-product-card',
@@ -8,10 +10,43 @@ import { Router } from '@angular/router';
 })
 export class ProductCardComponent {
   @Input() product: any;
+  imageUrl: any;
+  lowestPrice: number | undefined;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private readonly imagesService: ImagesService
+  ) {}
+
+  ngOnInit(): void {
+    this.loadImage(this.product.imageId);
+    if (this.product?.prices) {
+      this.lowestPrice = this.getLowestPrice(this.product.prices);
+    }
+  }
 
   navigateToProduct(productId: string): void {
     this.router.navigate(['/product', productId]);
+  }
+
+  getLowestPrice(prices: { key: string; value: number }[]): number {
+    return Math.min(...prices.map((price) => price.value));
+  }
+
+  loadImage(imageId: string): void {
+    this.imagesService.getImageById(imageId).subscribe(
+      (blob) => {
+        this.imageUrl = URL.createObjectURL(blob);
+      },
+      (error) => {
+        console.error('Error loading image', error);
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    if (this.imageUrl) {
+      URL.revokeObjectURL(this.imageUrl);
+    }
   }
 }

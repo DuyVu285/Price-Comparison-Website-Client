@@ -2,9 +2,9 @@
   <div class="breadcrumb-container">
     <nz-breadcrumb>
       <nz-breadcrumb-item>
-        <a [routerLink]="['../home']">Home</a>
+        <a [routerLink]="['/home']">Home</a>
       </nz-breadcrumb-item>
-      <nz-breadcrumb-item>Category Name</nz-breadcrumb-item>
+      <nz-breadcrumb-item>{{ categoryName }}</nz-breadcrumb-item>
     </nz-breadcrumb>
   </div>
   <div class="title-container">
@@ -12,11 +12,11 @@
       class="site-page-header"
       (nzBack)="onBack()"
       nzBackIcon
-      nzTitle="Category Name"
-      nzSubtitle="This is a category of product name"
+      [nzTitle]="categoryName"
+      nzSubtitle="{{ categoryName }} Products"
     ></nz-page-header>
   </div>
   <div class="products-listing-container">
-    <app-products-listing></app-products-listing>
+    <app-category-listing [category]="categoryName"></app-category-listing>
   </div>
 </div>
