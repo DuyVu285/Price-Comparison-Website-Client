@@ -169,10 +169,29 @@
             </button>
           </nz-form-control>
         </nz-form-item>
+
+        <nz-form-item class="form-item">
+          <nz-form-label class="form-label" [nzSpan]="4" nzFor="productImage"
+            >Product Image</nz-form-label
+          >
+          <nz-form-control [nzSpan]="15">
+            <input
+              type="file"
+              nz-input
+              placeholder="Upload Product Image"
+              (change)="onImageChange($event)"
+            />
+            <div *ngIf="imagePreview" class="image-preview">
+              <img [src]="imagePreview" alt="Product Image Preview" />
+            </div>
+          </nz-form-control>
+        </nz-form-item>
       </form>
     </div>
   </ng-container>
   <div *nzModalFooter>
-    <button nz-button nzType="primary" type="submit" (click)="onSubmit()">Add</button>
+    <button nz-button nzType="primary" type="submit" (click)="onSubmit()">
+      Add
+    </button>
   </div>
 </nz-modal>

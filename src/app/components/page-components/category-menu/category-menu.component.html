@@ -4,7 +4,12 @@
       <span nz-icon nzType="home" nzTheme="outline"></span> Home
     </a>
   </li>
-  <li nz-submenu nzTitle="Category" nzIcon="shop">
+  <li
+    nz-submenu
+    nzTitle="Category"
+    nzIcon="shop"
+    (nzOpenChange)="toggleCategoryMenu($event)"
+  >
     <ul>
       <li nz-menu-item><a [routerLink]="['/category', 'Acer']">Acer</a></li>
       <li nz-menu-item><a [routerLink]="['/category', 'Asus']">Asus</a></li>
@@ -17,6 +22,10 @@
       <li nz-menu-item><a [routerLink]="['/category', 'HP']">HP</a></li>
     </ul>
   </li>
-  <li nz-menu-item>New</li>
-  <li nz-menu-item>Recently View</li>
+  <li nz-menu-item *ngIf="!isCategoryOpen">
+    <a [routerLink]="['/category', 'Asus']">Asus</a>
+  </li>
+  <li nz-menu-item *ngIf="!isCategoryOpen">
+    <a [routerLink]="['/category', 'MSI']">MSI</a>
+  </li>
 </ul>

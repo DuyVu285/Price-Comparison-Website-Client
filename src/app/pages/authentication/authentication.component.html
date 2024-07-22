@@ -1,0 +1,13 @@
+<div class="authentication-container">
+  <div *ngIf="isDisplayedLogin">
+    <app-login></app-login>
+  </div>
+
+  <div *ngIf="!isDisplayedLogin">
+    <app-user-registration></app-user-registration>
+  </div>
+  Or
+  <a class="register-button" (click)="toggleDisplay()">
+    {{ isDisplayedLogin ? "Register Now!" : "Login Now!" }}
+  </a>
+</div>

@@ -9,16 +9,11 @@ import { ActivatedRoute } from '@angular/router';
 export class CategoryComponent {
   categoryName: string = 'Category Name';
 
-  constructor(private route: ActivatedRoute) {
-  }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       this.categoryName = params['name'];
-    })
-  }
-  onBack(): void {
-    console.log('onBack');
-    window.history.back();
+    });
   }
 }

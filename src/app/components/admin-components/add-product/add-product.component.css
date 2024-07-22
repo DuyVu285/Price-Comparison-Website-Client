@@ -43,3 +43,15 @@
 .dynamic-delete-button:hover {
   color: #777;
 }
+
+.image-preview {
+  margin-top: 10px;
+}
+
+.image-preview img {
+  max-width: 400px;
+  max-height: 300px;
+  height: auto;
+  border: 1px solid #ddd;
+  padding: 5px;
+}

@@ -63,6 +63,10 @@ export class ProductsService {
     );
   }
 
+  searchSimilarProducts(query: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.CrudUrl}/searchSimilar/${query}`);
+  }
+
   filterAndStoreProduct(data: any): Observable<any> {
     return this.http.post<any>(
       this.ScrapeUrl + '/api/products/filterAndStoreProduct',

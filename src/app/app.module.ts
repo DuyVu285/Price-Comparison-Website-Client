@@ -35,6 +35,9 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzStatisticModule } from 'ng-zorro-antd/statistic';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { NzSpaceModule } from 'ng-zorro-antd/space';
+import { NzSelectModule } from 'ng-zorro-antd/select';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 
 import { FooterComponent } from './components/page-components/footer/footer.component';
 import { SearchBoxComponent } from './components/page-components/search-box/search-box.component';
@@ -58,9 +61,14 @@ import { SummaryDashboardComponent } from './components/admin-components/summary
 import { AddProductComponent } from './components/admin-components/add-product/add-product.component';
 import { AddModelComponent } from './components/admin-components/add-model/add-model.component';
 import { UnfilteredproductsDashboardComponent } from './components/admin-components/unfilteredproducts-dashboard/unfilteredproducts-dashboard.component';
-import { LoginComponent } from './pages/login/login.component';
+import { LoginComponent } from './components/authentication-components/login/login.component';
 import { CategoryListingComponent } from './components/product-components/category-listing/category-listing.component';
-import { CustomCurrencyPipe } from './custom-currency.pipe';
+import { CustomCurrencyPipe } from './services/functions/custom-currency.pipe';
+import { RecentlyViewedProductsComponent } from './components/product-components/recently-viewed-products/recently-viewed-products.component';
+import { SimilarProductsComponent } from './components/product-components/similar-products/similar-products.component';
+import { UserRegistrationComponent } from './components/authentication-components/user-registration/user-registration.component';
+import { AuthenticationComponent } from './pages/authentication/authentication.component';
+
 registerLocaleData(en);
 
 @NgModule({
@@ -92,6 +100,10 @@ registerLocaleData(en);
     LoginComponent,
     CategoryListingComponent,
     CustomCurrencyPipe,
+    RecentlyViewedProductsComponent,
+    SimilarProductsComponent,
+    UserRegistrationComponent,
+    AuthenticationComponent,
   ],
   imports: [
     BrowserModule,
@@ -124,6 +136,9 @@ registerLocaleData(en);
     NzStatisticModule,
     NzNotificationModule,
     NzPageHeaderModule,
+    NzSpaceModule,
+    NzSelectModule,
+    NzCheckboxModule,
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent],

@@ -5,7 +5,8 @@ import { SearchComponent } from './pages/search/search.component';
 import { CategoryComponent } from './pages/category/category.component';
 import { ProductComponent } from './pages/product/product.component';
 import { AdminComponent } from './pages/admin/admin.component';
-import { LoginComponent } from './pages/login/login.component';
+import { AuthenticationComponent } from './pages/authentication/authentication.component';
+import { AdminGuard } from './services/functions/admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -13,8 +14,8 @@ const routes: Routes = [
   { path: 'search', component: SearchComponent },
   { path: 'category/:name', component: CategoryComponent },
   { path: 'product/:id', component: ProductComponent },
-  { path: 'admin', component: AdminComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'admin', component: AdminComponent, canActivate: [AdminGuard] },
+  { path: 'authentication', component: AuthenticationComponent },
   { path: '**', redirectTo: '/home' },
 ];
 

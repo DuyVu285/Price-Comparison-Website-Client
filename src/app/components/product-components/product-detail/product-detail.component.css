@@ -7,9 +7,88 @@
 }
 
 .price-comparison {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
+  padding: 16px;
 }
 
 .price-comparison h3 {
   font-weight: bold;
+}
+
+.product-image {
+  border-right: 1px solid lightgray;
+}
+
+.product-image img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: 0 auto;
+}
+
+.ant-descriptions-title .ng-star-inserted {
+  font-size: 2rem;
+}
+
+.product-description {
+  margin: 1rem 2rem 0 0;
+}
+
+.price-list {
+  border: 1px solid lightgray;
+  padding: 0.5rem;
+}
+
+.price {
+  font-weight: bold;
+  color: #ff4d4f;
+  margin-right: 1rem;
+}
+
+.price-lowest {
+  font-weight: bold;
+  color: #ff4d4f;
+}
+
+.website {
+  margin-right: 1rem;
+  margin-left: 1rem;
+}
+
+.product-description-list {
+  border: 1px solid lightgray;
+  padding: 0.5rem;
+}
+
+.price-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 0;
+}
+
+.item-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.website {
+  flex: 0 0 150px;
+  text-align: left;
+}
+
+.link {
+  flex-grow: 1;
+  text-align: left;
+  padding-left: 16px;
+}
+
+.price {
+  flex: 0 0 100px;
+  text-align: right;
+}
+
+.to-seller-button {
+  margin-left: 16px;
 }

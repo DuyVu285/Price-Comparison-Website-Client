@@ -1,0 +1,15 @@
+<div *ngIf="similarProducts.length > 0">
+  <h2 nzTypography>Similar Products</h2>
+  <div class="products-content">
+    <div nz-row [nzGutter]="16">
+      <div nz-col *ngFor="let product of similarProducts" nzSpan="6">
+        <div class="innerbox">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="similarProducts.length === 0">
+    <p>No similar products.</p>
+  </div>
+</div>

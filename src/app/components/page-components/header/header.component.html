@@ -20,9 +20,30 @@
         nzType="user"
         class="user"
         nzTheme="outline"
-        routerLink="/login"
-      >
-      </span>
+        routerLink="/authentication"
+        *ngIf="!isLoggedIn"
+      ></span>
+      <div *ngIf="isLoggedIn" class="user-logged">
+        <a
+          nz-dropdown
+          nzTrigger="click"
+          [nzDropdownMenu]="menu"
+          class="dropdown-trigger"
+        >
+          Hello {{ username }}
+          <i nz-icon nzType="down"></i>
+        </a>
+        <nz-dropdown-menu #menu="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item><a routerLink="/profile">Profile</a></li>
+            <li nz-menu-item *ngIf="isAdmin">
+              <a routerLink="/admin">Dashboard</a>
+            </li>
+            <li nz-menu-item><a routerLink="/bookmark">Bookmark</a></li>
+            <li nz-menu-item (click)="logout()">Logout</li>
+          </ul>
+        </nz-dropdown-menu>
+      </div>
     </div>
   </div>
 </header>

@@ -31,7 +31,11 @@
     </nz-form-item>
     <div nz-row class="login-form-margin">
       <div nz-col [nzSpan]="12">
-        <label nz-checkbox formControlName="remember">
+        <label
+          class="login-form-remember"
+          nz-checkbox
+          formControlName="remember"
+        >
           <span>Remember me</span>
         </label>
       </div>
@@ -46,7 +50,5 @@
     >
       Log in
     </button>
-    Or
-    <a>register now!</a>
   </form>
 </div>

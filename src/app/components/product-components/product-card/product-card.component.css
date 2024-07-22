@@ -4,9 +4,17 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+.nz-card {
+  flex: 1;
+}
+
 .nz-card-meta-title {
   white-space: normal;
   word-wrap: break-word;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  padding: 10px;
 }
 
 .product-card img {
@@ -28,7 +36,11 @@
   background-color: #ececec; /* Light grey color */
   padding: 0.5rem;
   border-radius: 0.25rem;
-  font-weight: 300;
+  font-weight: 500;
   font-size: 0.9rem;
   color: #747579;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }

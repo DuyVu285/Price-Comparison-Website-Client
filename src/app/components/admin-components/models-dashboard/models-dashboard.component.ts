@@ -85,7 +85,7 @@ export class ModelsDashboardComponent {
     };
     this.updateDisplayedModels();
   }
-  
+
   deleteRow(id: string): void {
     this.models = this.models.filter((item) => item._id !== id);
     this.modelsService.deleteModel(id).subscribe({
@@ -109,12 +109,13 @@ export class ModelsDashboardComponent {
   search(): void {
     this.visible = false;
     if (this.searchValue) {
+      const searchValueLower = this.searchValue.toLowerCase();
       const filteredModels = this.models.filter(
         (item) =>
-          item.brand &&
-          item.brand
-            .toLowerCase()
-            .indexOf(this.searchValue.toLowerCase()) !== -1
+          (item.brand && item.brand.toLowerCase().includes(searchValueLower)) ||
+          (item.series &&
+            item.series.toLowerCase().includes(searchValueLower)) ||
+          (item.line && item.line.toLowerCase().includes(searchValueLower))
       );
       this.displayedModels = filteredModels.slice(
         (this.pageIndex - 1) * this.pageSize,

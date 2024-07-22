@@ -15,43 +15,33 @@ import { ProductsService } from 'src/app/services/api/products.service';
 })
 export class AddProductComponent {
   @Output() productAdded: EventEmitter<void> = new EventEmitter<void>();
-
-  validateForm: FormGroup<{
-    productName: FormControl<string | null>;
-    description: FormArray<FormControl<string | null>>;
-    productCode: FormControl<string | null>;
-    modelType: FormGroup<{
-      brand: FormControl<string | null>;
-      series: FormControl<string | null>;
-      line: FormControl<string | null>;
-    }>;
-    prices: FormArray<
-      FormGroup<{
-        key: FormControl<string | null>;
-        value: FormControl<string | null>;
-      }>
-    >;
-  }> = this.fb.group({
-    productName: ['', [Validators.required]],
-    description: this.fb.array([this.createDescriptionControl()]),
-    productCode: ['', [Validators.required]],
-    modelType: this.fb.group({
-      brand: ['', [Validators.required]],
-      series: ['', [Validators.required]],
-      line: [''],
-    }),
-    prices: this.fb.array([this.createPriceGroup()]),
-  });
+  validateForm: FormGroup;
   isModalVisible = false;
+  selectedImage: File | null = null;
+  imagePreview: string | ArrayBuffer | null | undefined;
 
   constructor(
     private readonly productsService: ProductsService,
     private fb: FormBuilder
-  ) {}
+  ) {
+    this.validateForm = this.fb.group({
+      productName: ['', [Validators.required]],
+      description: this.fb.array([this.createDescriptionControl()]),
+      productCode: ['', [Validators.required]],
+      modelType: this.fb.group({
+        brand: ['', [Validators.required]],
+        series: ['', [Validators.required]],
+        line: [''],
+      }),
+      prices: this.fb.array([this.createPriceGroup()]),
+      imageId: [''],
+    });
+  }
 
   createDescriptionControl(): FormControl {
     return this.fb.control('', [Validators.required]);
   }
+
   createPriceGroup(): FormGroup {
     return this.fb.group({
       key: ['', [Validators.required, Validators.pattern(/https?:\/\/[^\s]+/)]],
@@ -102,11 +92,17 @@ export class AddProductComponent {
 
   onSubmit(): void {
     if (this.validateForm.valid) {
-      this.productsService.createProduct(this.validateForm.value).subscribe({
+      const formData = new FormData();
+      formData.append('product', JSON.stringify(this.validateForm.value));
+      if (this.selectedImage) {
+        formData.append('image', this.selectedImage);
+      }
+      this.productsService.createProduct(formData).subscribe({
         next: (response) => {
           console.log('Product created:', response);
           this.productAdded.emit();
           this.validateForm.reset();
+          this.imagePreview = null;
           this.isModalVisible = false;
         },
         error: (err) => console.error('HTTP Error:', err),
@@ -116,6 +112,18 @@ export class AddProductComponent {
         control.markAsDirty();
         control.updateValueAndValidity({ onlySelf: true });
       });
+    }
+  }
+
+  onImageChange(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.selectedImage = input.files[0];
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        this.imagePreview = e.target?.result; // Set image preview
+      };
+      reader.readAsDataURL(this.selectedImage);
     }
   }
 }

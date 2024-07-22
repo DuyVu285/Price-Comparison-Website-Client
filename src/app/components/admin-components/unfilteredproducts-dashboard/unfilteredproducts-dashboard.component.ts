@@ -62,6 +62,7 @@ export class UnfilteredproductsDashboardComponent {
         modelExists: false,
       };
     });
+    console.log(this.editCache);
   }
 
   updateDisplayedProducts(): void {
@@ -173,10 +174,8 @@ export class UnfilteredproductsDashboardComponent {
   }
 
   showNotification(title: string, content: string): void {
-    this.notification
-      .blank(title, content, { nzPlacement: 'bottom' })
-      .onClick.subscribe(() => {
-        console.log('notification clicked!');
-      });
+    this.notification.blank(title, content).onClick.subscribe(() => {
+      console.log('notification clicked!');
+    });
   }
 }

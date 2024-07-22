@@ -3,7 +3,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 @Component({
   selector: 'app-products-listing',
   templateUrl: './products-listing.component.html',
-  styleUrls: ['./products-listing.component.css']
+  styleUrls: ['./products-listing.component.css'],
 })
 export class ProductsListingComponent implements OnChanges {
   @Input() products: any[] = [];
@@ -24,10 +24,10 @@ export class ProductsListingComponent implements OnChanges {
   }
 
   loadProducts() {
-    console.log(this.products)
+    console.log(this.products);
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.productsToDisplay = this.products.slice(startIndex, endIndex);
-    console.log(this.productsToDisplay)
+    console.log(this.productsToDisplay);
   }
 }

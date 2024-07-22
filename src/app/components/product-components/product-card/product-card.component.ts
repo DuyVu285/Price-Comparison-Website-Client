@@ -1,6 +1,5 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { ImagesService } from 'src/app/services/api/images.service';
 
 @Component({
@@ -23,6 +22,12 @@ export class ProductCardComponent {
     if (this.product?.prices) {
       this.lowestPrice = this.getLowestPrice(this.product.prices);
     }
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        window.scrollTo(0, 0);
+      }
+    });
   }
 
   navigateToProduct(productId: string): void {

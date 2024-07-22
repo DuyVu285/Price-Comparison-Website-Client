@@ -5,12 +5,12 @@ import { ProductsService } from 'src/app/services/api/products.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   products: any[] = [];
 
-  constructor(private readonly productsService: ProductsService) { }
+  constructor(private readonly productsService: ProductsService) {}
 
   ngOnInit() {
     this.getProducts();
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
       },
       error: (error: HttpErrorResponse) => {
         console.log('Get failed', error);
-      }
-    })
+      },
+    });
   }
 }
