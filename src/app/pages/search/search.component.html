@@ -4,22 +4,17 @@
       <nz-breadcrumb-item>
         <a [routerLink]="['../home']">Home</a>
       </nz-breadcrumb-item>
-      <nz-breadcrumb-item>Item Name</nz-breadcrumb-item>
+      <nz-breadcrumb-item>{{ searchQuery }}</nz-breadcrumb-item>
     </nz-breadcrumb>
   </div>
-  <div nz-row>
-    <div nz-col nzSpan="4" class="side-menu-container">
-      <app-side-menu></app-side-menu>
-    </div>
-    <div nz-col nzSpan="20" class="products-listing-container">
-      <nz-card *ngFor="let product of searchResults">
-        <p>{{ product.productName }}</p>
-        <p>{{ product.description }}</p>
-        <nz-card *ngFor="let price of product.prices">
-          <p>{{ price.value }}</p>
-          <a href="{{ price.key }}">{{ price.key }}</a>
-        </nz-card>
-      </nz-card>
-    </div>
+  <h1 nzTypography>Search Results</h1>
+  <h2 nzTypography>Search Results For "{{ searchQuery }}"</h2>
+  <div class="products-listing-container">
+    <app-search-products-listing
+      [products]="searchResults"
+    ></app-search-products-listing>
+  </div>
+  <div>
+    <app-recently-viewed-products> </app-recently-viewed-products>
   </div>
 </div>

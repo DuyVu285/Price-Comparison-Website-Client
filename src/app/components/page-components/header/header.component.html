@@ -39,7 +39,9 @@
             <li nz-menu-item *ngIf="isAdmin">
               <a routerLink="/admin">Dashboard</a>
             </li>
-            <li nz-menu-item><a routerLink="/bookmark">Bookmark</a></li>
+            <li nz-menu-item>
+              <a [routerLink]="['/profile/bookmarks']"> Bookmark </a>
+            </li>
             <li nz-menu-item (click)="logout()">Logout</li>
           </ul>
         </nz-dropdown-menu>

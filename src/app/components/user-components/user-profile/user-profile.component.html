@@ -1,0 +1,24 @@
+<nz-card title="User Info" [nzBordered]="false">
+  <ng-container *ngIf="!editCache.edit; else editTemplate">
+    <h2 nzTypography>User Profile</h2>
+    <p><strong>Username:</strong> {{ profile?.username }}</p>
+    <p><strong>Email:</strong> {{ profile?.email }}</p>
+    <button nz-button nzType="primary" (click)="startEdit()">Edit</button>
+  </ng-container>
+
+  <ng-template #editTemplate>
+    <div>
+      <p>
+        <strong>Email:</strong>
+        <input
+          type="text"
+          nz-input
+          [(ngModel)]="editCache.data.email"
+          name="email"
+        />
+      </p>
+      <button nz-button nzType="primary" (click)="saveChanges()">Save</button>
+      <button nz-button (click)="cancelEdit()">Cancel</button>
+    </div>
+  </ng-template>
+</nz-card>

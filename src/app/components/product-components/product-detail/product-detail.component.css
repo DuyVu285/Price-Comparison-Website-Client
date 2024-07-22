@@ -26,6 +26,11 @@
   margin: 0 auto;
 }
 
+.bookmark {
+  display: block;
+  margin: auto;
+}
+
 .ant-descriptions-title .ng-star-inserted {
   font-size: 2rem;
 }

@@ -1,3 +1,12 @@
 .breadcrumb-container {
-    margin-left: 1rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
+}
+
+h1 {
+  text-align: center;
+}
+
+.products-listing-container {
+  height: 60%;
 }

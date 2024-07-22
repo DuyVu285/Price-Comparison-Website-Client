@@ -1,0 +1,39 @@
+.bookmarks-listing {
+  margin: 1rem;
+}
+
+.products-content {
+  height: 100%;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.view-all-link {
+  color: #3498db;
+}
+
+.innerbox {
+  margin: 0.5rem;
+}
+
+.pagination {
+  margin: 1rem;
+  background-color: #ffffff;
+  text-align: right;
+}
+
+.remove-bookmark {
+  margin: auto;
+  display: block;
+  width: 100%;
+}

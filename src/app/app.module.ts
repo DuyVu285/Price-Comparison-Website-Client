@@ -68,7 +68,11 @@ import { RecentlyViewedProductsComponent } from './components/product-components
 import { SimilarProductsComponent } from './components/product-components/similar-products/similar-products.component';
 import { UserRegistrationComponent } from './components/authentication-components/user-registration/user-registration.component';
 import { AuthenticationComponent } from './pages/authentication/authentication.component';
-
+import { UserProfileComponent } from './components/user-components/user-profile/user-profile.component';
+import { UserComponent } from './pages/user/user.component';
+import { ProfileBookmarksComponent } from './components/user-components/profile-bookmarks/profile-bookmarks.component';
+import { ChangePasswordComponent } from './components/user-components/change-password/change-password.component';
+import { SearchProductsListingComponent } from './components/product-components/search-products-listing/search-products-listing.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -104,6 +108,11 @@ registerLocaleData(en);
     SimilarProductsComponent,
     UserRegistrationComponent,
     AuthenticationComponent,
+    UserProfileComponent,
+    UserComponent,
+    ProfileBookmarksComponent,
+    ChangePasswordComponent,
+    SearchProductsListingComponent,
   ],
   imports: [
     BrowserModule,

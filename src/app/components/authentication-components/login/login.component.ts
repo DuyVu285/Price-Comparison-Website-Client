@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent implements OnInit {
     private fb: NonNullableFormBuilder,
     private usersService: UsersService,
     private router: Router,
-    private notification: NzNotificationService
+    private notification: NzNotificationService,
+    private appComponent: AppComponent
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +57,11 @@ export class LoginComponent implements OnInit {
               );
               localStorage.setItem('role', decodedToken.isAdmin);
               localStorage.setItem('username', decodedToken.username);
+              localStorage.setItem('userId', decodedToken.userId);
+              localStorage.setItem(
+                'bookmarks',
+                JSON.stringify(decodedToken.bookmarks)
+              );
               console.log(decodedToken);
               if (remember) {
                 localStorage.setItem('userName', userName || '');
@@ -64,7 +71,7 @@ export class LoginComponent implements OnInit {
                 localStorage.removeItem('password');
               }
 
-              this.router.navigate(['/']);
+              history.back();
             }
           }),
           catchError((error) => {
@@ -98,6 +105,8 @@ export class LoginComponent implements OnInit {
   }
 
   createNotification(type: string, title: string, content: string): void {
-    this.notification.create(type, title, content);
+    this.notification.create(type, title, content, {
+      nzPlacement: 'bottomRight',
+    });
   }
 }

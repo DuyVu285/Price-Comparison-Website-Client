@@ -1,5 +1,7 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ImagesService } from 'src/app/services/api/images.service';
+import { UsersService } from 'src/app/services/api/users.service';
 import { RecentlyViewedProductsService } from 'src/app/services/functions/recently-viewed-products.service';
 
 @Component({
@@ -15,10 +17,13 @@ export class ProductDetailComponent {
   websiteNames: string[] = [];
   bestPrice: { key: string; value: number } | undefined;
   bestWebsiteName: string | null | undefined;
+  isBookmarked = false;
 
   constructor(
     private readonly imagesService: ImagesService,
-    private recentlyViewedProductsService: RecentlyViewedProductsService
+    private recentlyViewedProductsService: RecentlyViewedProductsService,
+    private readonly usersService: UsersService,
+    private notification: NzNotificationService
   ) {}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -39,6 +44,7 @@ export class ProductDetailComponent {
       }
 
       this.extractWebsiteName(this.product?.url);
+      this.checkBookmark();
 
       if (this.product) {
         this.recentlyViewedProductsService.addProduct(this.product);
@@ -101,5 +107,76 @@ export class ProductDetailComponent {
     if (this.imageUrl) {
       URL.revokeObjectURL(this.imageUrl);
     }
+  }
+
+  checkBookmark() {
+    const bookmarks = localStorage.getItem('bookmarks');
+    if (bookmarks) {
+      const parsedBookmarks = JSON.parse(bookmarks);
+      this.isBookmarked = parsedBookmarks.includes(this.product._id);
+    }
+  }
+
+  createBookmark(bookmark: string) {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      this.showNotification('Error', 'User not logged in');
+      return;
+    }
+
+    this.usersService.createBookmark(bookmark, userId).subscribe({
+      next: (response) => {
+        const existingBookmarks = JSON.parse(
+          localStorage.getItem('bookmarks') || '[]'
+        );
+
+        if (!existingBookmarks.includes(bookmark)) {
+          existingBookmarks.push(bookmark);
+
+          localStorage.setItem('bookmarks', JSON.stringify(existingBookmarks));
+          this.checkBookmark();
+          this.showNotification('Success', 'Bookmark created successfully');
+        } else {
+          this.showNotification('Info', 'Bookmark already exists');
+        }
+      },
+      error: (error) => {
+        this.showNotification('Error', 'Failed to create bookmark');
+        console.error('Create bookmark failed', error);
+      },
+    });
+  }
+
+  deleteBookmark(bookmark: string) {
+    const userId = localStorage.getItem('userId');
+    if (!userId) {
+      this.showNotification('Error', 'User not logged in');
+      return;
+    }
+
+    this.usersService.deleteBookmark(bookmark, userId).subscribe({
+      next: () => {
+        // Remove bookmark from local state and storage
+        const existingBookmarks = JSON.parse(
+          localStorage.getItem('bookmarks') || '[]'
+        );
+        const updatedBookmarks = existingBookmarks.filter(
+          (b: string) => b !== bookmark
+        );
+        localStorage.setItem('bookmarks', JSON.stringify(updatedBookmarks));
+        this.checkBookmark();
+        this.showNotification('Success', 'Bookmark deleted successfully');
+      },
+      error: (error) => {
+        this.showNotification('Error', 'Failed to delete bookmark');
+        console.error('Delete bookmark failed', error);
+      },
+    });
+  }
+
+  showNotification(title: string, content: string): void {
+    this.notification.blank(title, content).onClick.subscribe(() => {
+      console.log('notification clicked!');
+    });
   }
 }

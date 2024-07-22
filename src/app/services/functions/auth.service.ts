@@ -32,6 +32,8 @@ export class AuthService {
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('role');
     localStorage.removeItem('username');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('bookmarks');
     this.loggedIn.next(false);
     this.isAdmin.next(false);
   }

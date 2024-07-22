@@ -3,6 +3,24 @@
     <div nz-row nzGutter="16">
       <div nz-col nzOffset="1" nzSpan="8" class="product-image">
         <img *ngIf="imageUrl" [src]="imageUrl" alt="Loaded Image" />
+        <button
+          *ngIf="!isBookmarked"
+          class="bookmark"
+          nz-button
+          nzType="primary"
+          (click)="createBookmark(product._id)"
+        >
+          Bookmark
+        </button>
+        <button
+          *ngIf="isBookmarked"
+          class="bookmark"
+          nz-button
+          nzType="primary"
+          (click)="deleteBookmark(product._id)"
+        >
+          Remove Bookmark
+        </button>
       </div>
       <div nz-col nzOffset="1" nzSpan="14" class="product-links">
         <h1>{{ product?.productName }}</h1>

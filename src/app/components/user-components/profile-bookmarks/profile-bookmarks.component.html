@@ -1,0 +1,22 @@
+<div class="bookmarks-listing">
+  <div class="section-heading">
+    <h2>Bookmarks</h2>
+  </div>
+  <div class="products-content">
+    <div nz-row [nzGutter]="16">
+      <div nz-col *ngFor="let product of products" nzSpan="6">
+        <div class="innerbox">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+        <button
+          class="remove-bookmark"
+          nz-button
+          nzType="primary"
+          (click)="removeBookmark(product._id)"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

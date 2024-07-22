@@ -81,7 +81,8 @@ export class UserRegistrationComponent {
   }
 
   createNotification(type: string, title: string, content: string): void {
-    this.notification.create(type, title, content);
+    this.notification.create(type, title, content,{
+      nzPlacement: 'bottomRight',});
   }
 
   reloadPage(): void {

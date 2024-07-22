@@ -76,4 +76,39 @@ export class UsersService {
       headers: this.getAuthHeaders(),
     });
   }
+
+  createBookmark(bookmark: string, id: string): Observable<any> {
+    console.log('Create bookmark:', bookmark, id);
+    return this.http.post(
+      `${this.baseUrl}/api/profiles/${id}/bookmark`,
+      { bookmark },
+      {
+        headers: this.getAuthHeaders(),
+      }
+    );
+  }
+
+  deleteBookmark(bookmark: string, id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/api/profiles/${id}/bookmark`, {
+      headers: this.getAuthHeaders(),
+      body: { bookmark },
+    });
+  }
+
+  changePassword(
+    id: string,
+    currentPassword: string,
+    newPassword: string
+  ): Observable<any> {
+    return this.http.patch(
+      `${this.baseUrl}/api/profiles/${id}/password`,
+      {
+        currentPassword,
+        newPassword,
+      },
+      {
+        headers: this.getAuthHeaders(),
+      }
+    );
+  }
 }

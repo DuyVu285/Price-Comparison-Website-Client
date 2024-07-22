@@ -1,0 +1,41 @@
+<nz-layout>
+  <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="null">
+    <div class="logo"><span nzTypography>Profile</span></div>
+    <ul nz-menu nzTheme="dark" nzMode="inline">
+      <li nz-menu-item (click)="selectSection('profile')">
+        <span nz-icon nzType="user"></span>
+        <span>Info</span>
+      </li>
+      <li nz-menu-item (click)="selectSection('bookmarks')">
+        <span nz-icon nzType="star"></span>
+        <span>Bookmarks</span>
+      </li>
+      <li nz-menu-item (click)="selectSection('change-password')">
+        <span nz-icon nzType="form"></span>
+        <span>Change Password</span>
+      </li>
+    </ul>
+  </nz-sider>
+  <nz-layout>
+    <nz-header>
+      <span
+        class="trigger"
+        nz-icon
+        [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
+        (click)="isCollapsed = !isCollapsed"
+      ></span>
+    </nz-header>
+    <nz-content>
+      <div class="inner-content">
+        <app-user-profile
+          *ngIf="selectedSection === 'profile'"
+        ></app-user-profile>
+        <app-profile-bookmarks
+          *ngIf="selectedSection === 'bookmarks'"
+        ></app-profile-bookmarks>
+        <app-change-password *ngIf="selectedSection === 'change-password'">
+        </app-change-password>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>

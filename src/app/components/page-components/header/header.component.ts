@@ -35,11 +35,11 @@ export class HeaderComponent implements OnInit {
   private updateAuthStatus() {
     this.username = localStorage.getItem('username');
     this.isLoggedIn = !!this.username;
-    this.isAdmin = localStorage.getItem('role') === 'true'; // Assuming 'true' means admin
+    this.isAdmin = localStorage.getItem('role') === 'true';
   }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/']); // Redirect to home page after logout
+    this.router.navigate(['/']);
   }
 }
