@@ -111,4 +111,8 @@ export class UsersService {
       }
     );
   }
+
+  getSummary(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/api/summary/users`);
+  }
 }

@@ -108,15 +108,21 @@ export class UnfilteredproductsDashboardComponent {
   }
 
   checkModels(): void {
-    this.unfilteredProducts.forEach((item) => {
-      this.modelsService
-        .checkModels(this.editCache[item._id].data.productName)
-        .subscribe({
-          next: (data: any) => {
-            console.log('Check model successfully', data);
-            this.editCache[item._id].modelExists = data;
-          },
+    const productNames = this.unfilteredProducts.map(
+      (item) => this.editCache[item._id].data.productName
+    );
+
+    this.modelsService.checkModels(productNames).subscribe({
+      next: (data: { [key: string]: boolean }) => {
+        console.log('Check models successfully', data);
+        this.unfilteredProducts.forEach((item) => {
+          this.editCache[item._id].modelExists =
+            data[this.editCache[item._id].data.productName];
         });
+      },
+      error: (err) => {
+        console.error('Error checking models', err);
+      },
     });
   }
 

@@ -73,6 +73,8 @@ import { UserComponent } from './pages/user/user.component';
 import { ProfileBookmarksComponent } from './components/user-components/profile-bookmarks/profile-bookmarks.component';
 import { ChangePasswordComponent } from './components/user-components/change-password/change-password.component';
 import { SearchProductsListingComponent } from './components/product-components/search-products-listing/search-products-listing.component';
+import { UsersDashboardComponent } from './components/admin-components/users-dashboard/users-dashboard.component';
+import { AddUserComponent } from './components/admin-components/add-user/add-user.component';
 registerLocaleData(en);
 
 @NgModule({
@@ -113,6 +115,8 @@ registerLocaleData(en);
     ProfileBookmarksComponent,
     ChangePasswordComponent,
     SearchProductsListingComponent,
+    UsersDashboardComponent,
+    AddUserComponent,
   ],
   imports: [
     BrowserModule,

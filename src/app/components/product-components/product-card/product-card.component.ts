@@ -34,8 +34,12 @@ export class ProductCardComponent {
     this.router.navigate(['/product', productId]);
   }
 
-  getLowestPrice(prices: { key: string; value: number }[]): number {
-    return Math.min(...prices.map((price) => price.value));
+  getLowestPrice(prices: { key: string; value: number }[]): number | undefined {
+    const validPrices = prices.filter((price) => price.value > 0);
+
+    return validPrices.length > 0
+      ? Math.min(...validPrices.map((price) => price.value))
+      : undefined;
   }
 
   loadImage(imageId: string): void {

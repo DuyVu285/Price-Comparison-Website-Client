@@ -39,6 +39,10 @@ export class ModelsDashboardComponent {
     });
   }
 
+  onModelAdded() {
+    this.getModels();
+  }
+
   updateEditCache(): void {
     this.models.forEach((item) => {
       this.editCache[item._id] = {
@@ -109,14 +113,15 @@ export class ModelsDashboardComponent {
   search(): void {
     this.visible = false;
     if (this.searchValue) {
-      const searchValueLower = this.searchValue.toLowerCase();
-      const filteredModels = this.models.filter(
-        (item) =>
-          (item.brand && item.brand.toLowerCase().includes(searchValueLower)) ||
-          (item.series &&
-            item.series.toLowerCase().includes(searchValueLower)) ||
-          (item.line && item.line.toLowerCase().includes(searchValueLower))
-      );
+      const searchTerms = this.searchValue
+        .toLowerCase()
+        .split(' ')
+        .filter((term) => term.length > 0);
+      const filteredModels = this.models.filter((item) => {
+        const itemText =
+          `${item.brand} ${item.series} ${item.line}`.toLowerCase();
+        return searchTerms.every((term) => itemText.includes(term));
+      });
       this.displayedModels = filteredModels.slice(
         (this.pageIndex - 1) * this.pageSize,
         this.pageIndex * this.pageSize

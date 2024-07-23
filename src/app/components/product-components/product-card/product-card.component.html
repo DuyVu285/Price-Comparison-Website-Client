@@ -4,12 +4,16 @@
       [nzTitle]="titleTemplate"
       [nzDescription]="descriptionTemplate"
     ></nz-card-meta>
+    <div class="availability">
+      <span nz-icon nzType="shopping-cart" nzTheme="outline"></span>
+      Available at {{ product.prices.length }} place(s)
+    </div>
     <div class="price" *ngIf="lowestPrice !== undefined">
-      {{ lowestPrice | customCurrency : "VND" : "vi-VN" }}
+      From {{ lowestPrice | customCurrency : "VND" : "vi-VN" }}
     </div>
   </nz-card>
   <ng-template #coverTemplate>
-    <img *ngIf="imageUrl" [src]="imageUrl" alt="Loaded Image" />
+    <img class="product-image" *ngIf="imageUrl" [src]="imageUrl" alt="Loaded Image" />
   </ng-template>
   <ng-template #titleTemplate>
     <div class="nz-card-meta-title">
@@ -18,9 +22,9 @@
   </ng-template>
   <ng-template #descriptionTemplate>
     <div class="product-description">
-      <nz-row [nzGutter]="16">
-        <nz-col *ngFor="let desc of product?.description" [nzSpan]="12">
-          <div>{{ desc }}</div>
+      <nz-row [nzGutter]="20">
+        <nz-col *ngFor="let desc of product?.description" [nzSpan]="11">
+          <div class="description-item">{{ desc }}</div>
         </nz-col>
       </nz-row>
     </div>

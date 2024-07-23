@@ -4,6 +4,7 @@ import { UnfiteredProductsService } from 'src/app/services/api/unfiltered-produc
 import { ModelsService } from 'src/app/services/api/models.service';
 import { ScrapeService } from 'src/app/services/api/scrape.service';
 import { NzNotificationService } from 'ng-zorro-antd/notification';
+import { UsersService } from 'src/app/services/api/users.service';
 @Component({
   selector: 'app-summary-dashboard',
   templateUrl: './summary-dashboard.component.html',
@@ -13,6 +14,7 @@ export class SummaryDashboardComponent {
   productsSummary: any;
   unfilteredProductsSummary: any;
   modelsSummary: any;
+  usersSummary: any;
   scrapingInProgress: boolean = false;
   totalProducts = 0;
 
@@ -21,6 +23,7 @@ export class SummaryDashboardComponent {
     private readonly productsService: ProductsService,
     private readonly ModelsService: ModelsService,
     private readonly scrapeService: ScrapeService,
+    private readonly usersService: UsersService,
     private notification: NzNotificationService
   ) {}
 
@@ -32,6 +35,7 @@ export class SummaryDashboardComponent {
     this.getProductsSummary();
     this.getUnfilteredProductsSummary();
     this.getModelsSummary();
+    this.getUsersSummary();
   }
 
   getProductsSummary() {
@@ -50,6 +54,18 @@ export class SummaryDashboardComponent {
       next: (data: any) => {
         this.unfilteredProductsSummary = data;
         console.log(this.unfilteredProductsSummary);
+      },
+      error: (error: any) => {
+        console.log(error);
+      },
+    });
+  }
+
+  getUsersSummary() {
+    this.usersService.getSummary().subscribe({
+      next: (data: any) => {
+        this.usersSummary = data;
+        console.log(data);
       },
       error: (error: any) => {
         console.log(error);
@@ -82,6 +98,7 @@ export class SummaryDashboardComponent {
             this.totalProducts +
             ' products have been scraped.'
         );
+        this.getSummary();
         this.scrapingInProgress = false;
         this.totalProducts = 0;
       },

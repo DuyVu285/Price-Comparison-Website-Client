@@ -2,10 +2,15 @@
   background-color: #ffffff;
   border: 1px solid #e5e5e5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .nz-card {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .nz-card-meta-title {
@@ -34,13 +39,26 @@
 
 .product-description {
   background-color: #ececec; /* Light grey color */
-  padding: 0.5rem;
+  padding: 1rem; /* Increased padding */
   border-radius: 0.25rem;
   font-weight: 500;
+  font-size: 0.8rem;
+  color: #747579;
+  flex: 1; /* Allow description to take remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.availability {
   font-size: 0.9rem;
   color: #747579;
-  height: 5rem;
-  display: flex;
-  align-items: center;
-  overflow: hidden;
+  margin-top: 0.5rem;
+  text-align: right;
+}
+
+.product-image {
+  width: 300px;
+  height: 200px;
 }

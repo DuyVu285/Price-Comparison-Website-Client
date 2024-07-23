@@ -6,6 +6,7 @@ import {
   Validators,
   FormArray,
 } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ProductsService } from 'src/app/services/api/products.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class AddProductComponent {
 
   constructor(
     private readonly productsService: ProductsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notification: NzNotificationService
   ) {
     this.validateForm = this.fb.group({
       productName: ['', [Validators.required]],
@@ -99,13 +101,17 @@ export class AddProductComponent {
       }
       this.productsService.createProduct(formData).subscribe({
         next: (response) => {
+          this.notification.create('success', 'Success', 'Product created');
           console.log('Product created:', response);
           this.productAdded.emit();
           this.validateForm.reset();
           this.imagePreview = null;
           this.isModalVisible = false;
         },
-        error: (err) => console.error('HTTP Error:', err),
+        error: (err) => {
+          console.error('HTTP Error:', err),
+            this.showNotification('Error', 'Product creation failed');
+        },
       });
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
@@ -125,5 +131,11 @@ export class AddProductComponent {
       };
       reader.readAsDataURL(this.selectedImage);
     }
+  }
+
+  showNotification(title: string, content: string): void {
+    this.notification.blank(title, content).onClick.subscribe(() => {
+      console.log('notification clicked!');
+    });
   }
 }

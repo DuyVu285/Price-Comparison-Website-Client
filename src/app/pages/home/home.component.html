@@ -4,23 +4,16 @@
     <app-banner></app-banner>
   </div>
 
-  <div nz-row class="featured-deals-container">
-    <div nz-col nzSpan="8">
-      <app-featured-deals></app-featured-deals>
-    </div>
-    <div nz-col nzSpan="8">
-      <app-featured-deals></app-featured-deals>
-    </div>
-    <div nz-col nzSpan="8">
-      <app-featured-deals></app-featured-deals>
-    </div>
-  </div>
-
   <div class="featured-products-container">
-    <app-featured-products></app-featured-products>
+    <app-featured-products
+      [products]="topExpensiveProducts"
+    ></app-featured-products>
   </div>
 
   <div *ngIf="!!products" class="products-listing-container">
     <app-products-listing [products]="products"></app-products-listing>
+  </div>
+  <div class="recently-viewed">
+    <app-recently-viewed-products></app-recently-viewed-products>
   </div>
 </div>

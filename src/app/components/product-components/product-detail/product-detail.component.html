@@ -40,6 +40,11 @@
             <nz-list class="price-list">
               <nz-list-item class="price-list-item">
                 <div class="item-content">
+                  <img
+                    [src]="getImageForWebsite(bestWebsiteName)"
+                    alt="{{ bestWebsiteName }}"
+                    class="website-image"
+                  />
                   <span class="website" nz-typography>
                     {{ bestWebsiteName }}
                   </span>
@@ -88,6 +93,11 @@
               class="price-list-item"
             >
               <div class="item-content">
+                <img
+                  [src]="getImageForWebsite(websiteNames[i])"
+                  alt="{{ websiteNames[i] }}"
+                  class="website-image"
+                />
                 <span class="website" nz-typography>{{ websiteNames[i] }}</span>
                 <a class="link" href="{{ price.key }}" target="_blank">
                   <span>{{ product.productName }}</span>

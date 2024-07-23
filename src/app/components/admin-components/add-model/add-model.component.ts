@@ -5,6 +5,7 @@ import {
   FormControl,
   Validators,
 } from '@angular/forms';
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 import { ModelsService } from 'src/app/services/api/models.service';
 
 @Component({
@@ -28,7 +29,8 @@ export class AddModelComponent {
 
   constructor(
     private readonly modelsService: ModelsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private notification: NzNotificationService
   ) {}
 
   showModal(): void {
@@ -54,11 +56,15 @@ export class AddModelComponent {
       this.modelsService.createModel(this.validateForm.value).subscribe({
         next: (response) => {
           console.log('Model created:', response);
+          this.showNotification('Success', 'Model created');
           this.modelAdded.emit();
           this.validateForm.reset();
           this.isModalVisible = false;
         },
-        error: (err) => console.error('HTTP Error:', err),
+        error: (err) => {console.error('HTTP Error:', err),
+          this.showNotification('Error', 'Model creation failed');
+        },
+
       });
     } else {
       Object.values(this.validateForm.controls).forEach((control) => {
@@ -66,5 +72,11 @@ export class AddModelComponent {
         control.updateValueAndValidity({ onlySelf: true });
       });
     }
+  }
+
+  showNotification(title: string, content: string): void {
+    this.notification.blank(title, content).onClick.subscribe(() => {
+      console.log('notification clicked!');
+    });
   }
 }

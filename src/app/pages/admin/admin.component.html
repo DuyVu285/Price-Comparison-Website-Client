@@ -14,6 +14,10 @@
         <span nz-icon nzType="file"></span>
         <span>Models</span>
       </li>
+      <li nz-menu-item (click)="selectSection('users')">
+        <span nz-icon nzType="user"></span>
+        <span>Users</span>
+      </li>
       <li nz-menu-item (click)="selectSection('unfilteredproducts')">
         <span nz-icon nzType="bug"></span>
         <span>Unfiltered Products</span>
@@ -37,6 +41,9 @@
         <app-products-dashboard
           *ngIf="selectedSection === 'products'"
         ></app-products-dashboard>
+        <app-users-dashboard
+          *ngIf="selectedSection === 'users'"
+        ></app-users-dashboard>
         <app-models-dashboard
           *ngIf="selectedSection === 'models'"
         ></app-models-dashboard>

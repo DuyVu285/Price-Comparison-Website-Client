@@ -1,25 +1,25 @@
-<span class="title">Models List</span>
+<span class="title">Users List</span>
 <div class="add-model-button">
-  <app-add-model (modelAdded)="onModelAdded()"></app-add-model>
+  <app-add-user (userAdded)="onUserAdded()"></app-add-user>
 </div>
 <br />
 <br />
 <nz-table
   #editRowTable
   nzBordered
-  [nzData]="displayedModels"
+  [nzData]="displayedUsers"
   [nzPageSize]="pageSize"
   [nzShowPagination]="true"
   [nzFrontPagination]="false"
   [nzPageSizeOptions]="[10, 20, 30, 40]"
-  [nzTotal]="models.length"
+  [nzTotal]="users.length"
   (nzPageIndexChange)="onPageIndexChange($event)"
 >
   <thead>
     <tr>
       <th nzWidth="2%"></th>
       <th nzWidth="30%">
-        Model
+        Username
         <nz-filter-trigger
           [(nzVisible)]="visible"
           [nzActive]="searchValue.length > 0"
@@ -28,64 +28,51 @@
           <span nz-icon nzType="search"></span>
         </nz-filter-trigger>
       </th>
-      <th nzWidth="15%">Brand</th>
-      <th nzWidth="15%">Series</th>
-      <th nzWidth="15%">Lines</th>
+      <th nzWidth="15%">Email</th>
       <th nzWidth="10%">Action</th>
     </tr>
   </thead>
   <tbody>
-    <ng-template ngFor let-model [ngForOf]="displayedModels">
+    <ng-template ngFor let-user [ngForOf]="displayedUsers">
       <tr class="fixed-row-height editable-row">
-        <ng-container *ngIf="!editCache[model._id].edit; else editTemplate">
+        <ng-container *ngIf="!editCache[user._id].edit; else editTemplate">
           <td></td>
           <td class="word-wrap">
-            {{ model.brand }} {{ model.series }} {{ model.line }}
+            {{ user.username }}
           </td>
-          <td class="word-wrap">{{ model.brand }}</td>
-          <td class="word-wrap">{{ model.series }}</td>
-          <td class="word-wrap">{{ model.line }}</td>
+          <td class="word-wrap">{{ user.email }}</td>
           <td>
-            <a (click)="startEdit(model._id)">Edit</a>
+            <a (click)="startEdit(user._id)">Edit</a>
             <a
               nz-popconfirm
               nzPopconfirmTitle="Sure to delete?"
-              (nzOnConfirm)="deleteRow(model._id)"
+              (nzOnConfirm)="deleteRow(user._id)"
               >Delete</a
             >
           </td>
         </ng-container>
         <ng-template #editTemplate>
-          <td class="word-wrap">
-            {{ model.brand }} {{ model.series }} {{ model.line }}
-          </td>
+          <td></td>
           <td>
             <input
               type="text"
               nz-input
-              [(ngModel)]="editCache[model._id].data.brand"
+              [(ngModel)]="editCache[user._id].data.username"
             />
           </td>
           <td>
             <input
               type="text"
               nz-input
-              [(ngModel)]="editCache[model._id].data.series"
+              [(ngModel)]="editCache[user._id].data.email"
             />
           </td>
           <td>
-            <input
-              type="text"
-              nz-input
-              [(ngModel)]="editCache[model._id].data.line"
-            />
-          </td>
-          <td>
-            <a (click)="saveEdit(model._id)" class="save">Save</a>
+            <a (click)="saveEdit(user._id)" class="save">Save</a>
             <a
               nz-popconfirm
               nzPopconfirmTitle="Sure to cancel?"
-              (nzOnConfirm)="cancelEdit(model._id)"
+              (nzOnConfirm)="cancelEdit(user._id)"
               >Cancel</a
             >
           </td>

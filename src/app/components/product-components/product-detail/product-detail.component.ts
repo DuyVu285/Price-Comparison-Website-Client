@@ -18,7 +18,13 @@ export class ProductDetailComponent {
   bestPrice: { key: string; value: number } | undefined;
   bestWebsiteName: string | null | undefined;
   isBookmarked = false;
-
+  websiteImages: { [key: string]: string } = {
+    gearvn: 'gearvn.png',
+    xgear: 'xgear.png',
+    anphatpc: 'anphat.png',
+    cellphones: 'cellphones.png',
+    laptopaz: 'laptopaz.png',
+  };
   constructor(
     private readonly imagesService: ImagesService,
     private recentlyViewedProductsService: RecentlyViewedProductsService,
@@ -65,19 +71,35 @@ export class ProductDetailComponent {
     );
   }
 
-  getLowestPrice(prices: { key: string; value: number }[]): number {
-    return Math.min(...prices.map((price) => price.value));
+  getLowestPrice(prices: { key: string; value: number }[]): number | undefined {
+    const validPrices = prices.filter((price) => price.value > 0);
+
+    return validPrices.length > 0
+      ? Math.min(...validPrices.map((price) => price.value))
+      : undefined;
   }
 
   findBestPrice(): void {
     if (this.product?.prices) {
-      this.bestPrice = this.product.prices.reduce(
-        (prev: { value: number }, current: { value: number }) =>
-          prev.value < current.value ? prev : current
+      const validPrices = this.product.prices.filter(
+        (price: any) => price.value > 0
       );
-      this.bestWebsiteName = this.extractWebsiteName(this.bestPrice?.key || '');
+
+      if (validPrices.length > 0) {
+        this.bestPrice = validPrices.reduce(
+          (prev: { value: number }, current: { value: number }) =>
+            prev.value < current.value ? prev : current
+        );
+        this.bestWebsiteName = this.extractWebsiteName(
+          this.bestPrice?.key || ''
+        );
+      } else {
+        this.bestPrice = undefined;
+        this.bestWebsiteName = 'No valid prices available';
+      }
     }
   }
+
   ScrollIntoView(divId: string) {
     console.log(divId);
     let element = document.getElementById(divId);
@@ -101,6 +123,16 @@ export class ProductDetailComponent {
     } catch (e) {
       return null;
     }
+  }
+
+  getImageForWebsite(websiteName: string | null | undefined): string {
+    if (!websiteName) {
+      return 'assets/logo/logo.gif';
+    }
+    const imageFileName = this.websiteImages[websiteName];
+    return imageFileName
+      ? `assets/logo/${imageFileName}`
+      : 'assets/logo/logo.gif';
   }
 
   ngOnDestroy(): void {

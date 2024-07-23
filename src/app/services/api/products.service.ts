@@ -43,24 +43,7 @@ export class ProductsService {
   }
 
   searchProducts(query: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.CrudUrl}/search/${query}`).pipe(
-      catchError((error) => {
-        console.error('Error in first search:', error);
-        return of([]);
-      }),
-      switchMap((resultFromFirstSearch) => {
-        if (resultFromFirstSearch.length > 0) {
-          return of(resultFromFirstSearch);
-        } else {
-          return this.http.get<any[]>(`${this.ScrapeUrl}/search/${query}`).pipe(
-            catchError((error) => {
-              console.error('Error in second search:', error);
-              return of([]);
-            })
-          );
-        }
-      })
-    );
+    return this.http.get<any[]>(`${this.CrudUrl}/search/${query}`);
   }
 
   searchSimilarProducts(query: string): Observable<any[]> {

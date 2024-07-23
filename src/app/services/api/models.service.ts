@@ -33,8 +33,11 @@ export class ModelsService {
     return this.http.delete<any>(`${this.CrudUrl + '/api/models'}/${modelId}`);
   }
 
-  checkModels(query: string): Observable<boolean> {
-    return this.http.get<boolean>(`${this.CrudUrl}/api/models/check/${query}`);
+  checkModels(productNames: string[]): Observable<{ [key: string]: boolean }> {
+    return this.http.post<{ [key: string]: boolean }>(
+      `${this.CrudUrl}/api/models/check`,
+      { productNames }
+    );
   }
 
   getSummary(): Observable<any> {

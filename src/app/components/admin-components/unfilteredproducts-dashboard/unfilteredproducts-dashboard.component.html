@@ -105,6 +105,7 @@
         nz-input
         placeholder="Search name"
         [(ngModel)]="searchValue"
+        (keyup.enter)="search()"
       />
       <button
         nz-button

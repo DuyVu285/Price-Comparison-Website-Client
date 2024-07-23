@@ -1,9 +1,12 @@
 <nz-list nzGrid>
-  <div nz-row [nzGutter]="16">
+  <div nz-row [nzGutter]="20">
     <div nz-col [nzSpan]="4" *ngFor="let product of products">
       <nz-list-item>
         <app-product-card [product]="product"></app-product-card>
       </nz-list-item>
+    </div>
+    <div nz-col [nzSpan]="4" *ngFor="let i of emptySlots">
+      <nz-list-item> </nz-list-item>
     </div>
   </div>
 </nz-list>

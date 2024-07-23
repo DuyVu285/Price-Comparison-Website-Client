@@ -8,6 +8,16 @@ import { ProductsService } from 'src/app/services/api/products.service';
 })
 export class SearchProductsListingComponent {
   @Input() products: any[] = [];
+  emptySlots: number[] = [];
 
-  ngOnChanges(changes: SimpleChanges): void {}
+  ngOnInit(): void {
+    this.calculateEmptySlots();
+  }
+
+  calculateEmptySlots(): void {
+    const remainder = this.products.length % 5;
+    if (remainder !== 0) {
+      this.emptySlots = Array(5 - remainder).fill(0);
+    }
+  }
 }
